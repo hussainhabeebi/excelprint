@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { SiteLogo } from "@/components/marketing/site-logo";
 import { businessConfig } from "@/lib/config/business";
 import { Phone } from "lucide-react";
 
@@ -14,13 +15,8 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
-        <Link href="/" className="flex items-center gap-2 shrink-0">
-          <span className="flex h-8 w-8 items-center justify-center rounded-md bg-primary text-sm font-bold text-primary-foreground">
-            EP
-          </span>
-          <span className="text-lg font-semibold tracking-tight">
-            Excel<span className="text-brand">Print</span>
-          </span>
+        <Link href="/" className="shrink-0">
+          <SiteLogo />
         </Link>
 
         <nav className="hidden items-center gap-6 md:flex">
