@@ -6,7 +6,17 @@ import type { MetadataRoute } from "next";
  */
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://excelprintajman.com";
-  const staticRoutes = ["", "/products", "/quote", "/printing-services-ajman"];
+  const staticRoutes = [
+    "",
+    "/products",
+    "/quote",
+    "/printing-services-ajman",
+    "/terms",
+    "/privacy",
+    "/refund-policy",
+    "/shipping-policy",
+    "/cookie-policy",
+  ];
 
   return staticRoutes.map((route) => ({
     url: `${baseUrl}${route}`,

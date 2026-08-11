@@ -81,14 +81,46 @@ export function SiteFooter() {
             &copy; {year} Excel Printing Ajman. All rights reserved.
             {businessConfig.vatNumber ? ` TRN: ${businessConfig.vatNumber}` : ""}
           </p>
-          <div className="flex gap-4">
+          <div className="flex flex-wrap gap-4">
             <Link href="/terms" className="hover:text-foreground">
               Terms
             </Link>
             <Link href="/privacy" className="hover:text-foreground">
               Privacy
             </Link>
+            <Link href="/refund-policy" className="hover:text-foreground">
+              Refund Policy
+            </Link>
+            <Link href="/shipping-policy" className="hover:text-foreground">
+              Shipping Policy
+            </Link>
+            <Link href="/cookie-policy" className="hover:text-foreground">
+              Cookies
+            </Link>
           </div>
+        </div>
+
+        <div className="mt-4 border-t border-border pt-4 text-center text-xs text-muted-foreground">
+          <p>
+            Site built by{" "}
+            <a
+              href="https://aiingo.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium hover:text-foreground"
+            >
+              Aiingo
+            </a>{" "}
+            &amp;{" "}
+            <a
+              href="https://leadvyne.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium hover:text-foreground"
+            >
+              Leadvyne
+            </a>
+          </p>
         </div>
       </div>
     </footer>
