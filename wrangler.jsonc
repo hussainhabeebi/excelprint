@@ -1,0 +1,83 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "excelprint",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2025-01-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+
+  // Local dev bindings. Preview/production values are placeholders — fill
+  // in real resource IDs after running the `wrangler d1 create` / `r2
+  // bucket create` / `queues create` commands from README.md. Never commit
+  // real production IDs that are meant to stay private beyond this repo's
+  // own Cloudflare account (D1/R2/Queue IDs are not secrets, but keep
+  // account-level tokens out of this file regardless).
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "excelprint-db",
+      "database_id": "REPLACE_WITH_D1_DATABASE_ID",
+      "migrations_dir": "db/migrations"
+    }
+  ],
+
+  "r2_buckets": [
+    {
+      "binding": "ARTWORK_BUCKET",
+      "bucket_name": "excelprint-artwork"
+    }
+  ],
+
+  "queues": {
+    "producers": [
+      { "binding": "AI_DESIGN_QUEUE", "queue": "excelprint-ai-design" },
+      { "binding": "NOTIFICATIONS_QUEUE", "queue": "excelprint-notifications" },
+      { "binding": "ARTWORK_PROCESSING_QUEUE", "queue": "excelprint-artwork-processing" },
+      { "binding": "ORDER_PROCESSING_QUEUE", "queue": "excelprint-order-processing" }
+    ],
+    "consumers": [
+      { "queue": "excelprint-ai-design", "max_batch_size": 5, "max_retries": 3 },
+      { "queue": "excelprint-notifications", "max_batch_size": 10, "max_retries": 5 },
+      { "queue": "excelprint-artwork-processing", "max_batch_size": 5, "max_retries": 3 },
+      { "queue": "excelprint-order-processing", "max_batch_size": 10, "max_retries": 3 }
+    ]
+  },
+
+  "vars": {
+    "APP_ENV": "development"
+  },
+
+  "env": {
+    "preview": {
+      "d1_databases": [
+        {
+          "binding": "DB",
+          "database_name": "excelprint-db-preview",
+          "database_id": "REPLACE_WITH_PREVIEW_D1_DATABASE_ID",
+          "migrations_dir": "db/migrations"
+        }
+      ],
+      "r2_buckets": [
+        { "binding": "ARTWORK_BUCKET", "bucket_name": "excelprint-artwork-preview" }
+      ],
+      "vars": { "APP_ENV": "preview" }
+    },
+    "production": {
+      "d1_databases": [
+        {
+          "binding": "DB",
+          "database_name": "excelprint-db-production",
+          "database_id": "REPLACE_WITH_PRODUCTION_D1_DATABASE_ID",
+          "migrations_dir": "db/migrations"
+        }
+      ],
+      "r2_buckets": [
+        { "binding": "ARTWORK_BUCKET", "bucket_name": "excelprint-artwork-production" }
+      ],
+      "vars": { "APP_ENV": "production" }
+    }
+  }
+}

@@ -1,0 +1,8 @@
+# Copy to .dev.vars for `wrangler dev` / `npm run cf:dev` — Wrangler loads
+# this file automatically as Worker secrets/vars for local development.
+# For `next dev` (without Wrangler) use .env.local instead — see .env.example.
+
+TURNSTILE_SECRET_KEY=
+STRIPE_SECRET_KEY=
+STRIPE_WEBHOOK_SECRET=
+FAL_KEY=
