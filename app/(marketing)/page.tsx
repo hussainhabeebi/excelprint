@@ -3,7 +3,6 @@ import type { Metadata } from "next";
 import { ArrowRight } from "lucide-react";
 import { Hero } from "@/components/marketing/hero";
 import { ProcessSteps } from "@/components/marketing/process-steps";
-import { MobileStickyCta } from "@/components/marketing/mobile-sticky-cta";
 import { ProductCard } from "@/components/products/product-card";
 import { CatalogProductCard } from "@/components/products/catalog-product-card";
 import { Button } from "@/components/ui/button";
@@ -93,8 +92,6 @@ export default async function HomePage() {
           </Button>
         </div>
       </section>
-
-      <MobileStickyCta />
     </>
   );
 }

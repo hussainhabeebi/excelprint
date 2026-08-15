@@ -1,6 +1,23 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, CheckCircle2, Sparkles, Wand2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { TypewriterText } from "@/components/marketing/typewriter-text";
+import { HeroIllustration } from "@/components/marketing/hero-illustration";
+
+const ROTATING_PRODUCTS = [
+  "Business Cards",
+  "Flyers",
+  "Banners",
+  "Stickers",
+  "Stamps",
+  "Packaging",
+];
+
+const FEATURE_STRIP = [
+  { icon: Sparkles, label: "Live price preview as you configure" },
+  { icon: Wand2, label: "Upload artwork or generate an AI draft" },
+  { icon: CheckCircle2, label: "Approve your proof before we print" },
+];
 
 export function Hero() {
   return (
@@ -11,7 +28,12 @@ export function Hero() {
             Printing &amp; branding in Ajman, UAE
           </span>
           <h1 className="mt-4 text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
-            Print Anything. Design It. Approve It. Get It Delivered.
+            Print{" "}
+            <span className="text-brand">
+              <TypewriterText words={ROTATING_PRODUCTS} />
+            </span>
+            <br />
+            Design It. Approve It. Get It Delivered.
           </h1>
           <p className="mt-4 max-w-xl text-lg text-muted-foreground">
             Professional printing, custom design and fast production in Ajman. Configure your job, see the price
@@ -28,24 +50,29 @@ export function Hero() {
               <Link href="/quote">Request Custom Quote</Link>
             </Button>
           </div>
-          <p className="mt-6 text-sm text-muted-foreground">
-            Choose a product → Configure specs → Design or upload artwork → Approve your proof → Pay securely → Track
-            production.
-          </p>
+
+          <ul className="mt-8 flex flex-col gap-2.5 sm:hidden">
+            {FEATURE_STRIP.map((item) => (
+              <li key={item.label} className="flex items-center gap-2 text-sm text-muted-foreground">
+                <item.icon className="size-4 shrink-0 text-brand" />
+                {item.label}
+              </li>
+            ))}
+          </ul>
         </div>
 
-        <div className="relative">
-          <div className="grid grid-cols-2 gap-4">
-            <div className="col-span-2 flex h-40 items-center justify-center rounded-xl border border-border bg-background shadow-sm">
-              <span className="text-sm font-medium text-muted-foreground">Live price preview as you configure</span>
-            </div>
-            <div className="flex h-32 items-center justify-center rounded-xl border border-border bg-background shadow-sm">
-              <span className="text-sm font-medium text-muted-foreground">Upload or generate artwork</span>
-            </div>
-            <div className="flex h-32 items-center justify-center rounded-xl border border-border bg-background shadow-sm">
-              <span className="text-sm font-medium text-muted-foreground">Approve your proof</span>
-            </div>
-          </div>
+        <div>
+          <HeroIllustration />
+          <ul className="mt-6 hidden gap-4 sm:grid sm:grid-cols-3">
+            {FEATURE_STRIP.map((item) => (
+              <li key={item.label} className="flex flex-col items-center gap-2 text-center text-xs text-muted-foreground">
+                <span className="flex size-9 items-center justify-center rounded-full bg-accent text-accent-foreground">
+                  <item.icon className="size-4" />
+                </span>
+                {item.label}
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>
