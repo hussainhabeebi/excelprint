@@ -13,6 +13,7 @@ const ROLE_SECTIONS: Record<StaffRole, readonly string[]> = {
     "dashboard",
     "orders",
     "products",
+    "categories",
     "pricing",
     "customers",
     "quotes",

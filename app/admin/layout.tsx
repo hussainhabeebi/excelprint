@@ -9,6 +9,7 @@ const NAV_SECTIONS: { href: string; label: string; section: string }[] = [
   { href: "/admin/design-queue", label: "Design Queue", section: "design-queue" },
   { href: "/admin/production", label: "Production", section: "production-queue" },
   { href: "/admin/products", label: "Products", section: "products" },
+  { href: "/admin/categories", label: "Categories", section: "categories" },
   { href: "/admin/pricing", label: "Pricing", section: "pricing" },
   { href: "/admin/customers", label: "Customers", section: "customers" },
   { href: "/admin/quotes", label: "Quotes", section: "quotes" },
