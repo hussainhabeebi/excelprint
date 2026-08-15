@@ -32,18 +32,19 @@
     }
   ],
 
+  // Producers only for now — the app can enqueue messages (e.g.
+  // env.AI_DESIGN_QUEUE.send(...)) once that code exists. Consumers are
+  // deliberately not declared here: attaching a consumer requires the
+  // deployed script to export a `queue()` handler, which only exists once
+  // workers/ai-design etc. are implemented (Phase 6+). Declaring a
+  // consumer against a script with no queue() handler fails deploy with
+  // Cloudflare error 11001 ("Queue handler is missing").
   "queues": {
     "producers": [
       { "binding": "AI_DESIGN_QUEUE", "queue": "excelprint-ai-design" },
       { "binding": "NOTIFICATIONS_QUEUE", "queue": "excelprint-notifications" },
       { "binding": "ARTWORK_PROCESSING_QUEUE", "queue": "excelprint-artwork-processing" },
       { "binding": "ORDER_PROCESSING_QUEUE", "queue": "excelprint-order-processing" }
-    ],
-    "consumers": [
-      { "queue": "excelprint-ai-design", "max_batch_size": 5, "max_retries": 3 },
-      { "queue": "excelprint-notifications", "max_batch_size": 10, "max_retries": 5 },
-      { "queue": "excelprint-artwork-processing", "max_batch_size": 5, "max_retries": 3 },
-      { "queue": "excelprint-order-processing", "max_batch_size": 10, "max_retries": 3 }
     ]
   },
 
