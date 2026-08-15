@@ -5,8 +5,12 @@ import { Hero } from "@/components/marketing/hero";
 import { ProcessSteps } from "@/components/marketing/process-steps";
 import { MobileStickyCta } from "@/components/marketing/mobile-sticky-cta";
 import { ProductCard } from "@/components/products/product-card";
+import { CatalogProductCard } from "@/components/products/catalog-product-card";
 import { Button } from "@/components/ui/button";
 import { POPULAR_PRODUCTS, TRUST_BADGES } from "@/lib/config/popular-products";
+import { listProducts } from "@/lib/catalog/queries";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Excel Printing Ajman | Custom Printing, Branding & Design",
@@ -14,7 +18,9 @@ export const metadata: Metadata = {
     "Configure and order business cards, flyers, banners, stamps, packaging and more. Design, approve and pay online — printed and delivered in Ajman, UAE.",
 };
 
-export default function HomePage() {
+export default async function HomePage() {
+  const featuredProducts = await listProducts({ featuredOnly: true, limit: 8 });
+
   return (
     <>
       <Hero />
@@ -45,9 +51,11 @@ export default function HomePage() {
         </div>
 
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-          {POPULAR_PRODUCTS.map((product) => (
-            <ProductCard key={product.slug} product={product} />
-          ))}
+          {featuredProducts.length > 0
+            ? featuredProducts.map((product) => <CatalogProductCard key={product.id} product={product} />)
+            : // No products in the database yet (nothing seeded/added in admin) — fall back to
+              // the illustrative placeholder catalog so the homepage never looks broken.
+              POPULAR_PRODUCTS.map((product) => <ProductCard key={product.slug} product={product} />)}
         </div>
 
         <div className="mt-8 flex justify-center sm:hidden">
