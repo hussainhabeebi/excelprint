@@ -9,17 +9,18 @@
     "binding": "ASSETS"
   },
 
-  // Local dev bindings. Preview/production values are placeholders — fill
-  // in real resource IDs after running the `wrangler d1 create` / `r2
-  // bucket create` / `queues create` commands from README.md. Never commit
-  // real production IDs that are meant to stay private beyond this repo's
-  // own Cloudflare account (D1/R2/Queue IDs are not secrets, but keep
-  // account-level tokens out of this file regardless).
+  // Top-level bindings — used by `wrangler deploy` (no --env flag), i.e.
+  // this is the environment actually live at the production domain. The
+  // `env.preview`/`env.production` blocks below are still placeholders for
+  // a future split into separate preview/production Cloudflare
+  // environments; not currently used by the deploy command in place.
+  // D1/R2/Queue IDs and names are not secrets, but account-level tokens
+  // still never belong in this file.
   "d1_databases": [
     {
       "binding": "DB",
       "database_name": "excelprint-db",
-      "database_id": "REPLACE_WITH_D1_DATABASE_ID",
+      "database_id": "760c6238-3814-4662-bf12-667d819952c8",
       "migrations_dir": "db/migrations"
     }
   ],
