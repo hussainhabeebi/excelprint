@@ -18,8 +18,20 @@ export const metadata: Metadata = {
     "Configure and order business cards, flyers, banners, stamps, packaging and more. Design, approve and pay online — printed and delivered in Ajman, UAE.",
 };
 
+async function getFeaturedProductsSafely() {
+  try {
+    return await listProducts({ featuredOnly: true, limit: 8 });
+  } catch (error) {
+    // The homepage has a perfectly good placeholder catalog to fall back to
+    // (e.g. before migrations/seed data exist, or a transient D1 issue) —
+    // never let a catalog read take down the entire homepage.
+    console.error("Failed to load featured products for homepage", error);
+    return [];
+  }
+}
+
 export default async function HomePage() {
-  const featuredProducts = await listProducts({ featuredOnly: true, limit: 8 });
+  const featuredProducts = await getFeaturedProductsSafely();
 
   return (
     <>
