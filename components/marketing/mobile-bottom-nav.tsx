@@ -2,14 +2,14 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Grid2x2, Home, MessageSquarePlus, User } from "lucide-react";
+import { Grid2x2, Home, ShoppingCart, User } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const TABS = [
   { href: "/", label: "Home", icon: Home, match: (path: string) => path === "/" },
   { href: "/products", label: "Products", icon: Grid2x2, match: (path: string) => path.startsWith("/product") },
-  { href: "/quote", label: "Quote", icon: MessageSquarePlus, match: (path: string) => path.startsWith("/quote") },
-  { href: "/account", label: "Account", icon: User, match: (path: string) => path.startsWith("/account") || path.startsWith("/login") },
+  { href: "/cart", label: "Cart", icon: ShoppingCart, match: (path: string) => path.startsWith("/cart") || path.startsWith("/checkout") },
+  { href: "/account", label: "Account", icon: User, match: (path: string) => path.startsWith("/account") || path.startsWith("/login") || path.startsWith("/orders") },
 ];
 
 /**

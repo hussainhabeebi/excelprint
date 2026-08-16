@@ -1,11 +1,11 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import Link from "next/link";
-import { ArrowRight, Zap } from "lucide-react";
+import { useMemo, useState, useTransition } from "react";
+import { ShoppingCart, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn, formatMoneyAed } from "@/lib/utils";
 import { computeConfiguredPrice, type ConfiguratorSchema } from "@/lib/pricing/configurator";
+import { addToCartAction } from "@/lib/cart/actions";
 
 function defaultSelections(schema: ConfiguratorSchema): string[] {
   return schema.options
@@ -23,6 +23,8 @@ export function ProductConfigurator({ schema }: { schema: ConfiguratorSchema }) 
   const [optionValueIds, setOptionValueIds] = useState<string[]>(() => defaultSelections(schema));
   const [quantity, setQuantity] = useState(schema.quantityTiers[0]?.quantity ?? 0);
   const [productionSpeed, setProductionSpeed] = useState<"standard" | "express">("standard");
+  const [error, setError] = useState<string | null>(null);
+  const [isPending, startTransition] = useTransition();
 
   const { breakdown } = useMemo(
     () => computeConfiguredPrice(schema, { optionValueIds, quantity, productionSpeed }),
@@ -40,6 +42,21 @@ export function ProductConfigurator({ schema }: { schema: ConfiguratorSchema }) 
   function toggleMulti(valueId: string) {
     setOptionValueIds((prev) => (prev.includes(valueId) ? prev.filter((id) => id !== valueId) : [...prev, valueId]));
   }
+
+  function handleAddToCart() {
+    setError(null);
+    startTransition(async () => {
+      const result = await addToCartAction(schema.productSlug, { optionValueIds, quantity, productionSpeed });
+      if (result?.error) setError(result.error);
+    });
+  }
+
+  const addToCartButton = (
+    <Button size="lg" variant="brand" onClick={handleAddToCart} disabled={isPending} className="w-full sm:w-auto">
+      {isPending ? "Adding…" : "Add to Cart"}
+      <ShoppingCart />
+    </Button>
+  );
 
   return (
     <div className="grid gap-10 pb-28 lg:grid-cols-3 lg:pb-0">
@@ -136,18 +153,16 @@ export function ProductConfigurator({ schema }: { schema: ConfiguratorSchema }) 
             </div>
           </fieldset>
         )}
+
+        {error && <p className="text-sm text-destructive lg:hidden">{error}</p>}
       </div>
 
       {/* Desktop summary sidebar */}
       <div className="hidden lg:block">
         <div className="sticky top-24 rounded-xl border border-border bg-secondary/30 p-6">
           <PriceBreakdown breakdown={breakdown} currency={schema.currency} />
-          <Button asChild size="lg" variant="brand" className="mt-6 w-full">
-            <Link href={`/design/${schema.productSlug}`}>
-              Continue
-              <ArrowRight />
-            </Link>
-          </Button>
+          {error && <p className="mt-3 text-sm text-destructive">{error}</p>}
+          <div className="mt-6">{addToCartButton}</div>
         </div>
       </div>
 
@@ -158,12 +173,7 @@ export function ProductConfigurator({ schema }: { schema: ConfiguratorSchema }) 
             <p className="text-xs text-muted-foreground">Total (excl. delivery)</p>
             <p className="text-lg font-semibold">{formatMoneyAed(breakdown.totalCents)}</p>
           </div>
-          <Button asChild variant="brand" size="lg">
-            <Link href={`/design/${schema.productSlug}`}>
-              Continue
-              <ArrowRight />
-            </Link>
-          </Button>
+          {addToCartButton}
         </div>
       </div>
     </div>

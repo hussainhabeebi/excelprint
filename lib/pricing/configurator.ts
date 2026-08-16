@@ -124,3 +124,27 @@ export function computeConfiguredPrice(schema: ConfiguratorSchema, selections: C
 
   return { breakdown, tierFound: tier !== null };
 }
+
+export interface DisplayLine {
+  label: string;
+  value: string;
+}
+
+/** Human-readable summary of a set of selections, for cart/order display. */
+export function buildDisplayLines(schema: ConfiguratorSchema, selections: ConfiguratorSelections): DisplayLine[] {
+  const lines: DisplayLine[] = [];
+
+  for (const option of schema.options) {
+    const selectedLabels = option.values
+      .filter((v) => selections.optionValueIds.includes(v.id))
+      .map((v) => v.label);
+    if (selectedLabels.length > 0) {
+      lines.push({ label: option.name, value: selectedLabels.join(", ") });
+    }
+  }
+
+  lines.push({ label: "Quantity", value: selections.quantity.toLocaleString() });
+  lines.push({ label: "Production", value: selections.productionSpeed === "express" ? "Express" : "Standard" });
+
+  return lines;
+}
