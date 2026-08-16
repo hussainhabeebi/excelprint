@@ -1,21 +1,18 @@
 import Link from "next/link";
 import { ArrowRight, Clock } from "lucide-react";
 import { Card } from "@/components/ui/card";
-import { DEFAULT_PRODUCT_ICON, ICONS_BY_SLUG } from "@/lib/catalog/icon";
+import { ProductIllustration } from "@/components/products/product-illustration";
 import { formatMoneyAed } from "@/lib/utils";
 import type { CatalogProductSummary } from "@/lib/catalog/types";
 
 export function CatalogProductCard({ product }: { product: CatalogProductSummary }) {
-  const Icon = ICONS_BY_SLUG[product.slug] ?? DEFAULT_PRODUCT_ICON;
-
   return (
     <Link href={`/product/${product.slug}`} className="group block">
       <Card className="h-full overflow-hidden py-0 transition-shadow hover:shadow-md">
-        <div className="flex aspect-[4/3] items-center justify-center bg-secondary">
-          {/* Product photography upload isn't built yet (R2 upload arrives with
-           * the artwork phase) — every seeded product falls back to an icon. */}
-          <Icon className="size-12 text-muted-foreground/60 transition-colors group-hover:text-brand" strokeWidth={1.5} />
-        </div>
+        {/* Falls back to an illustrated tile until real product photography
+         * is uploaded — R2-backed image serving lands with the artwork
+         * phase, at which point product.primaryImageKey takes over here. */}
+        <ProductIllustration slug={product.slug} className="aspect-[4/3] w-full" />
         <div className="flex flex-1 flex-col gap-2 p-4">
           <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">{product.categoryName}</p>
           <h3 className="font-semibold text-foreground">{product.name}</h3>

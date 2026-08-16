@@ -1,17 +1,14 @@
 import Link from "next/link";
 import { ArrowRight, Clock } from "lucide-react";
 import { Card } from "@/components/ui/card";
+import { ProductIllustration } from "@/components/products/product-illustration";
 import type { PopularProduct } from "@/lib/config/popular-products";
 
 export function ProductCard({ product }: { product: PopularProduct }) {
-  const Icon = product.icon;
-
   return (
     <Link href={`/product/${product.slug}`} className="group block">
       <Card className="h-full overflow-hidden py-0 transition-shadow hover:shadow-md">
-        <div className="flex aspect-[4/3] items-center justify-center bg-secondary">
-          <Icon className="size-12 text-muted-foreground/60 transition-colors group-hover:text-brand" strokeWidth={1.5} />
-        </div>
+        <ProductIllustration slug={product.slug} className="aspect-[4/3] w-full" />
         <div className="flex flex-1 flex-col gap-2 p-4">
           <h3 className="font-semibold text-foreground">{product.name}</h3>
           <p className="text-sm text-muted-foreground">{product.shortDescription}</p>

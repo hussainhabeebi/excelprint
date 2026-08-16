@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { ArrowRight, CheckCircle2, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { getProductBySlug } from "@/lib/catalog/queries";
-import { DEFAULT_PRODUCT_ICON, ICONS_BY_SLUG } from "@/lib/catalog/icon";
+import { ProductIllustration } from "@/components/products/product-illustration";
 import { formatMoneyAed } from "@/lib/utils";
 
 export const dynamic = "force-dynamic";
@@ -30,7 +30,6 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
 
   if (!product) notFound();
 
-  const Icon = ICONS_BY_SLUG[product.slug] ?? DEFAULT_PRODUCT_ICON;
   const requirements = product.artworkRequirements;
 
   return (
@@ -46,9 +45,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
       </nav>
 
       <div className="grid gap-10 lg:grid-cols-2">
-        <div className="flex aspect-square items-center justify-center rounded-xl border border-border bg-secondary">
-          <Icon className="size-24 text-muted-foreground/50" strokeWidth={1.25} />
-        </div>
+        <ProductIllustration slug={product.slug} className="aspect-square rounded-xl border border-border" iconClassName="size-24" />
 
         <div>
           <h1 className="text-3xl font-semibold tracking-tight">{product.name}</h1>
