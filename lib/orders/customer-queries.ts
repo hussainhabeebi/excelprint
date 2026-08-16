@@ -1,7 +1,7 @@
 import "server-only";
-import { and, desc, eq } from "drizzle-orm";
+import { and, desc, eq, inArray } from "drizzle-orm";
 import { getDb } from "@/lib/db/client";
-import { addresses, deliveries, deliveryMethods, orderItems, orderStatusHistory, orders } from "@/db/schema";
+import { addresses, artworks, artworkVersions, deliveries, deliveryMethods, orderItems, orderStatusHistory, orders } from "@/db/schema";
 
 export async function listCustomerOrders(customerId: string) {
   const db = getDb();
@@ -28,7 +28,37 @@ export async function getCustomerOrderByNumber(customerId: string, orderNumber: 
     .limit(1);
   if (!order) return null;
 
-  const items = await db.select().from(orderItems).where(eq(orderItems.orderId, order.id));
+  const itemRows = await db.select().from(orderItems).where(eq(orderItems.orderId, order.id));
+
+  const artworkRows = itemRows.length
+    ? await db
+        .select({
+          orderItemId: artworks.orderItemId,
+          currentVersionId: artworks.currentVersionId,
+          fileName: artworkVersions.fileName,
+          versionNumber: artworkVersions.versionNumber,
+          createdAt: artworkVersions.createdAt,
+        })
+        .from(artworks)
+        .leftJoin(artworkVersions, eq(artworks.currentVersionId, artworkVersions.id))
+        .where(
+          inArray(
+            artworks.orderItemId,
+            itemRows.map((i) => i.id),
+          ),
+        )
+    : [];
+
+  const items = itemRows.map((item) => {
+    const artwork = artworkRows.find((a) => a.orderItemId === item.id);
+    return {
+      ...item,
+      currentArtworkVersion:
+        artwork?.currentVersionId && artwork.fileName
+          ? { id: artwork.currentVersionId, fileName: artwork.fileName, versionNumber: artwork.versionNumber! }
+          : null,
+    };
+  });
 
   const [delivery] = await db
     .select({

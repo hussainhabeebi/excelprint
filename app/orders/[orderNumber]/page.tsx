@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, FileUp, Wand2 } from "lucide-react";
 import { getCurrentUser } from "@/lib/auth/current-user";
 import { getCustomerOrderByNumber } from "@/lib/orders/customer-queries";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { formatMoneyAed } from "@/lib/utils";
 import { ORDER_STATUS_LABELS, PAYMENT_STATUS_LABELS, orderStatusBadgeVariant } from "@/lib/orders/display";
 import type { CartItemConfiguration } from "@/lib/cart/types";
@@ -12,18 +13,24 @@ import type { CartItemConfiguration } from "@/lib/cart/types";
 export const dynamic = "force-dynamic";
 export const metadata: Metadata = { title: "Order Details" };
 
+const DESIGN_METHOD_LABELS: Record<string, string> = {
+  UPLOAD: "You uploaded your artwork",
+  REQUEST_DESIGN: "Design requested from Excel Printing",
+  AI_GENERATE: "AI design draft",
+};
+
 export default async function OrderDetailPage({
   params,
   searchParams,
 }: {
   params: Promise<{ orderNumber: string }>;
-  searchParams: Promise<{ placed?: string }>;
+  searchParams: Promise<{ placed?: string; design?: string }>;
 }) {
   const user = await getCurrentUser();
   if (!user || user.type !== "customer") redirect("/orders");
 
   const { orderNumber } = await params;
-  const { placed } = await searchParams;
+  const { placed, design } = await searchParams;
   const result = await getCustomerOrderByNumber(user.id, orderNumber);
   if (!result) notFound();
 
@@ -37,9 +44,21 @@ export default async function OrderDetailPage({
           <div>
             <p className="font-medium">Order placed successfully.</p>
             <p className="text-sm text-emerald-800">
-              We&apos;ll be in touch about your artwork next — no payment is due until you approve your design proof.
+              Choose how to provide your artwork below — no payment is due until you approve your design proof.
             </p>
           </div>
+        </div>
+      )}
+      {design === "uploaded" && (
+        <div className="mb-6 flex items-start gap-3 rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-3 text-emerald-900">
+          <CheckCircle2 className="mt-0.5 size-5 shrink-0" />
+          <p className="font-medium">Artwork uploaded. Our team will prepare your proof next.</p>
+        </div>
+      )}
+      {design === "requested" && (
+        <div className="mb-6 flex items-start gap-3 rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-3 text-emerald-900">
+          <CheckCircle2 className="mt-0.5 size-5 shrink-0" />
+          <p className="font-medium">Design request submitted. A designer will be in touch.</p>
         </div>
       )}
 
@@ -77,6 +96,33 @@ export default async function OrderDetailPage({
                       </p>
                     </div>
                     <p className="whitespace-nowrap font-semibold">{formatMoneyAed(item.totalPriceCents)}</p>
+                  </div>
+
+                  <div className="mt-3 border-t border-border pt-3">
+                    {item.designMethod ? (
+                      <div className="flex items-center gap-2 text-sm">
+                        {item.designMethod === "UPLOAD" ? (
+                          <FileUp className="size-4 text-brand" />
+                        ) : (
+                          <Wand2 className="size-4 text-brand" />
+                        )}
+                        <span>{DESIGN_METHOD_LABELS[item.designMethod] ?? item.designMethod}</span>
+                        {item.currentArtworkVersion && (
+                          <a
+                            href={`/api/artwork/${item.currentArtworkVersion.id}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-brand hover:underline"
+                          >
+                            View file
+                          </a>
+                        )}
+                      </div>
+                    ) : (
+                      <Button asChild size="sm" variant="brand">
+                        <Link href={`/orders/${orderNumber}/design/${item.id}`}>Choose how to provide your artwork</Link>
+                      </Button>
+                    )}
                   </div>
                 </li>
               );
