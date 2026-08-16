@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { formatMoneyAed } from "@/lib/utils";
 import { ORDER_STATUS_LABELS, PAYMENT_STATUS_LABELS, orderStatusBadgeVariant } from "@/lib/orders/display";
+import type { ArtworkStatus } from "@/lib/orders/constants";
 import type { CartItemConfiguration } from "@/lib/cart/types";
 
 export const dynamic = "force-dynamic";
@@ -18,6 +19,8 @@ const DESIGN_METHOD_LABELS: Record<string, string> = {
   REQUEST_DESIGN: "Design requested from Excel Printing",
   AI_GENERATE: "AI design draft",
 };
+
+const PROOF_READY_STATUSES: ArtworkStatus[] = ["PROOF_READY", "FINAL_PROOF_READY"];
 
 export default async function OrderDetailPage({
   params,
@@ -61,6 +64,18 @@ export default async function OrderDetailPage({
           <p className="font-medium">Design request submitted. A designer will be in touch.</p>
         </div>
       )}
+      {design === "approved" && (
+        <div className="mb-6 flex items-start gap-3 rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-3 text-emerald-900">
+          <CheckCircle2 className="mt-0.5 size-5 shrink-0" />
+          <p className="font-medium">Artwork approved. We&apos;ll be in touch about payment and production next.</p>
+        </div>
+      )}
+      {design === "changes-requested" && (
+        <div className="mb-6 flex items-start gap-3 rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-3 text-emerald-900">
+          <CheckCircle2 className="mt-0.5 size-5 shrink-0" />
+          <p className="font-medium">Your requested changes were sent to our design team.</p>
+        </div>
+      )}
 
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
@@ -98,7 +113,7 @@ export default async function OrderDetailPage({
                     <p className="whitespace-nowrap font-semibold">{formatMoneyAed(item.totalPriceCents)}</p>
                   </div>
 
-                  <div className="mt-3 border-t border-border pt-3">
+                  <div className="mt-3 flex flex-wrap items-center gap-3 border-t border-border pt-3">
                     {item.designMethod ? (
                       <div className="flex items-center gap-2 text-sm">
                         {item.designMethod === "UPLOAD" ? (
@@ -122,6 +137,19 @@ export default async function OrderDetailPage({
                       <Button asChild size="sm" variant="brand">
                         <Link href={`/orders/${orderNumber}/design/${item.id}`}>Choose how to provide your artwork</Link>
                       </Button>
+                    )}
+                    {PROOF_READY_STATUSES.includes(item.artworkStatus) && (
+                      <Button asChild size="sm" variant="brand">
+                        <Link href={`/orders/${orderNumber}/proof/${item.id}`}>Review Proof</Link>
+                      </Button>
+                    )}
+                    {item.artworkStatus === "CHANGE_REQUESTED" && (
+                      <Link href={`/orders/${orderNumber}/proof/${item.id}`} className="text-sm text-brand hover:underline">
+                        View your requested changes
+                      </Link>
+                    )}
+                    {item.artworkStatus === "APPROVED" && (
+                      <Badge variant="success">Artwork Approved</Badge>
                     )}
                   </div>
                 </li>
