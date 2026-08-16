@@ -6,11 +6,11 @@ const FOOTER_COLUMNS: { title: string; links: { href: string; label: string }[] 
   {
     title: "Products",
     links: [
-      { href: "/products/business-cards", label: "Business Cards" },
-      { href: "/products/flyers", label: "Flyers" },
-      { href: "/products/brochures", label: "Brochures" },
-      { href: "/products/stamps", label: "Stamps" },
-      { href: "/products/roll-up-banners", label: "Roll-up Banners" },
+      { href: "/product/business-cards", label: "Business Cards" },
+      { href: "/product/flyers", label: "Flyers" },
+      { href: "/product/brochures", label: "Brochures" },
+      { href: "/product/stamps", label: "Stamps" },
+      { href: "/product/roll-up-banners", label: "Roll-up Banners" },
     ],
   },
   {

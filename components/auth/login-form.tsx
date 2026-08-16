@@ -36,7 +36,8 @@ export function LoginForm() {
       return;
     }
 
-    router.push("/account");
+    const redirectTo = new URLSearchParams(window.location.search).get("redirect") || "/account";
+    router.push(redirectTo);
     router.refresh();
   }
 
