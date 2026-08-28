@@ -117,3 +117,48 @@ INSERT INTO quantity_tiers (id, product_id, quantity, unit_price_cents, sort_ord
   ('qt_fl_1000', 'prod_flyers', 1000, 35, 2),
   ('qt_fl_2500', 'prod_flyers', 2500, 28, 3),
   ('qt_fl_5000', 'prod_flyers', 5000, 22, 4);
+
+-- Additional featured products for local homepage/catalog UI testing ---------
+-- These rows reuse the representative products and placeholder prices from
+-- lib/config/popular-products.ts. They are development data only.
+INSERT INTO products (
+  id, category_id, name, slug, description, short_description,
+  starting_price_cents, currency, production_time_standard_days, production_time_express_days,
+  is_active, is_featured, created_at, updated_at
+) VALUES
+  (
+    'prod_brochures', 'cat_marketing_printing', 'Brochures', 'brochures',
+    'Bi-fold and tri-fold brochures that sell. Example/development data.',
+    'Bi-fold and tri-fold brochures that sell.',
+    12000, 'AED', 4, 2, 1, 1, unixepoch() * 1000, unixepoch() * 1000
+  ),
+  (
+    'prod_stamps', 'cat_business_printing', 'Stamps', 'stamps',
+    'Self-inking company and signature stamps. Example/development data.',
+    'Self-inking company and signature stamps.',
+    3500, 'AED', 2, 1, 1, 1, unixepoch() * 1000, unixepoch() * 1000
+  ),
+  (
+    'prod_stickers', 'cat_marketing_printing', 'Stickers', 'stickers',
+    'Die-cut, vinyl and transparent stickers. Example/development data.',
+    'Die-cut, vinyl and transparent stickers.',
+    4000, 'AED', 3, 1, 1, 1, unixepoch() * 1000, unixepoch() * 1000
+  ),
+  (
+    'prod_banners', 'cat_marketing_printing', 'Banners', 'banners',
+    'Large-format banners for indoor and outdoor use. Example/development data.',
+    'Large-format banners for indoor and outdoor use.',
+    15000, 'AED', 3, 1, 1, 1, unixepoch() * 1000, unixepoch() * 1000
+  ),
+  (
+    'prod_roll_up_banners', 'cat_marketing_printing', 'Roll-up Banners', 'roll-up-banners',
+    'Portable stands for events and exhibitions. Example/development data.',
+    'Portable stands for events and exhibitions.',
+    25000, 'AED', 4, 2, 1, 1, unixepoch() * 1000, unixepoch() * 1000
+  ),
+  (
+    'prod_packaging', 'cat_marketing_printing', 'Packaging', 'packaging',
+    'Custom boxes, bags and sleeves. Example/development data.',
+    'Custom boxes, bags and sleeves.',
+    20000, 'AED', 7, 3, 1, 1, unixepoch() * 1000, unixepoch() * 1000
+  );
