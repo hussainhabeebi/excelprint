@@ -22,7 +22,7 @@ const FEATURE_STRIP = [
 
 export function Hero() {
   return (
-    <section className="relative isolate min-h-[560px] overflow-hidden border-b border-border sm:min-h-[590px] lg:min-h-[630px]">
+    <section className="relative isolate min-h-[560px] overflow-hidden border-b border-border sm:min-h-[570px] lg:min-h-[570px]">
       <Image
         src="/hero/hero-1.jpg"
         alt="Professional large-format printing services in Ajman, UAE"
@@ -30,15 +30,15 @@ export function Hero() {
         priority
         quality={90}
         sizes="100vw"
-        className="object-cover object-[70%_center]"
+        className="object-cover object-[72%_center] sm:object-[70%_center]"
       />
 
       <div
-        className="absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,0.98)_0%,rgba(255,255,255,0.94)_36%,rgba(255,255,255,0.58)_52%,rgba(255,255,255,0.16)_68%,rgba(255,255,255,0)_82%)] sm:bg-[linear-gradient(90deg,rgba(255,255,255,0.99)_0%,rgba(255,255,255,0.96)_28%,rgba(255,255,255,0.62)_38%,rgba(255,255,255,0.20)_46%,rgba(255,255,255,0)_50%)]"
+        className="absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,0.99)_0%,rgba(255,255,255,0.96)_38%,rgba(255,255,255,0.70)_58%,rgba(255,255,255,0.22)_74%,rgba(255,255,255,0)_86%)] sm:bg-[linear-gradient(90deg,rgba(255,255,255,0.99)_0%,rgba(255,255,255,0.96)_30%,rgba(255,255,255,0.62)_42%,rgba(255,255,255,0.18)_52%,rgba(255,255,255,0)_58%)] lg:bg-[linear-gradient(90deg,rgba(255,255,255,0.99)_0%,rgba(255,255,255,0.96)_25%,rgba(255,255,255,0.58)_36%,rgba(255,255,255,0.16)_45%,rgba(255,255,255,0)_50%)]"
         aria-hidden="true"
       />
 
-      <div className="relative z-10 mx-auto flex min-h-[560px] max-w-7xl flex-col justify-center px-4 py-10 sm:min-h-[590px] sm:px-6 sm:py-12 lg:min-h-[630px] lg:px-8 lg:py-14">
+      <div className="relative z-10 mx-auto flex min-h-[560px] max-w-7xl flex-col justify-center px-4 py-8 sm:min-h-[570px] sm:px-6 sm:py-10 lg:min-h-[570px] lg:px-8 lg:py-10">
         <div className="max-w-xl lg:max-w-2xl">
           <span className="inline-flex items-center rounded-full border border-border/80 bg-white/90 px-3 py-1 text-xs font-medium text-muted-foreground">
             Printing &amp; branding in Ajman, UAE
@@ -57,8 +57,10 @@ export function Hero() {
             Professional printing, custom design and fast production in Ajman. Configure your job, see the price
             instantly, and approve your proof before it ever goes to press.
           </p>
+        </div>
 
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+        <div className="mt-7 flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+          <div className="flex shrink-0 flex-col gap-3 sm:flex-row">
             <Button asChild size="lg" variant="brand">
               <Link href="/products">
                 Start Your Order
@@ -69,18 +71,19 @@ export function Hero() {
               <Link href="/quote">Request Custom Quote</Link>
             </Button>
           </div>
-        </div>
 
-        <ul className="mt-10 grid max-w-3xl grid-cols-2 gap-x-4 gap-y-4 border-t border-slate-900/10 pt-5 sm:grid-cols-4 sm:gap-x-6">
-          {FEATURE_STRIP.map((item) => (
-            <li key={item.label} className="flex items-center gap-2.5 text-sm font-medium text-slate-700">
-              <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-white/90 text-brand shadow-sm">
-                <item.icon className="size-4" />
-              </span>
-              {item.label}
-            </li>
-          ))}
-        </ul>
+          <ul className="grid grid-cols-2 gap-2 sm:grid-cols-4 lg:flex lg:items-center lg:justify-end">
+            {FEATURE_STRIP.map((item) => (
+              <li
+                key={item.label}
+                className="flex items-center gap-2 rounded-full bg-white/90 px-3 py-2 text-xs font-medium text-slate-700 shadow-sm"
+              >
+                <item.icon className="size-4 shrink-0 text-brand" />
+                <span className="whitespace-nowrap">{item.label}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </section>
   );
