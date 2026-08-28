@@ -1,8 +1,8 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, CheckCircle2, Sparkles, Wand2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { TypewriterText } from "@/components/marketing/typewriter-text";
-import { HeroIllustration } from "@/components/marketing/hero-illustration";
 
 const ROTATING_PRODUCTS = [
   "Business Cards",
@@ -62,7 +62,16 @@ export function Hero() {
         </div>
 
         <div>
-          <HeroIllustration />
+          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl shadow-lg sm:aspect-[16/10] lg:aspect-auto lg:h-[480px]">
+            <Image
+              src="/hero/hero-1.jpg"
+              alt="Professional large-format printing services in Ajman, UAE"
+              fill
+              priority
+              sizes="(min-width: 1280px) 592px, (min-width: 1024px) 50vw, (min-width: 640px) calc(100vw - 3rem), calc(100vw - 2rem)"
+              className="object-cover object-center"
+            />
+          </div>
           <ul className="mt-6 hidden gap-4 sm:grid sm:grid-cols-3">
             {FEATURE_STRIP.map((item) => (
               <li key={item.label} className="flex flex-col items-center gap-2 text-center text-xs text-muted-foreground">
