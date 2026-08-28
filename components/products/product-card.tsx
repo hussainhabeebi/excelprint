@@ -1,14 +1,30 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Clock } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { ProductIllustration } from "@/components/products/product-illustration";
+import { PRODUCT_IMAGES } from "@/components/products/product-images";
 import type { PopularProduct } from "@/lib/config/popular-products";
 
 export function ProductCard({ product }: { product: PopularProduct }) {
+  const productImage = PRODUCT_IMAGES[product.slug];
+
   return (
     <Link href={`/product/${product.slug}`} className="group block">
       <Card className="h-full overflow-hidden py-0 transition-shadow hover:shadow-md">
-        <ProductIllustration slug={product.slug} className="aspect-[4/3] w-full" />
+        {productImage ? (
+          <div className="relative aspect-[4/3] w-full overflow-hidden">
+            <Image
+              src={productImage.src}
+              alt={productImage.alt}
+              fill
+              sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
+              className="object-cover"
+            />
+          </div>
+        ) : (
+          <ProductIllustration slug={product.slug} className="aspect-[4/3] w-full" />
+        )}
         <div className="flex flex-1 flex-col gap-2 p-4">
           <h3 className="font-semibold text-foreground">{product.name}</h3>
           <p className="text-sm text-muted-foreground">{product.shortDescription}</p>
