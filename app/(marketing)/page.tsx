@@ -66,7 +66,7 @@ export default async function HomePage() {
             ? featuredProducts.map((product) => <CatalogProductCard key={product.id} product={product} />)
             : // No products in the database yet (nothing seeded/added in admin) — fall back to
               // the illustrative placeholder catalog so the homepage never looks broken.
-              POPULAR_PRODUCTS.map((product) => <ProductCard key={product.slug} product={product} />)}
+              POPULAR_PRODUCTS.slice(0, 8).map((product) => <ProductCard key={product.slug} product={product} />)}
         </div>
 
         <div className="mt-8 flex justify-center sm:hidden">
