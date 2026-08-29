@@ -34,22 +34,21 @@ export function ProcessSteps() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden border-y border-brand-deep bg-brand-deep">
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-black/20" aria-hidden="true" />
-      <div className="relative mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
+    <section ref={sectionRef} className="border-y border-brand/10 bg-accent/60">
+      <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
         <div className="mx-auto mb-10 max-w-2xl text-center">
-          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-bright">Simple from start to finish</span>
-          <h2 className="mt-2 text-2xl font-semibold tracking-tight text-white sm:text-3xl">How it works</h2>
-          <p className="mt-2 text-white/75">
+          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-brand">Simple from start to finish</span>
+          <h2 className="mt-2 text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">How it works</h2>
+          <p className="mt-2 text-muted-foreground">
             A straightforward path from idea to finished print — no back-and-forth emails required.
           </p>
         </div>
 
         <div className="relative pl-8 sm:pl-0">
-          <div className="absolute bottom-8 left-3.5 top-8 w-px bg-white/20 sm:hidden" aria-hidden="true" />
-          <div className="absolute left-[10%] right-[10%] top-8 hidden h-px bg-white/15 lg:block" aria-hidden="true">
+          <div className="absolute bottom-8 left-3.5 top-8 w-px bg-brand/30 sm:hidden" aria-hidden="true" />
+          <div className="absolute left-[10%] right-[10%] top-8 hidden h-px bg-brand/20 lg:block" aria-hidden="true">
             <span
-              className={`block h-full origin-left bg-brand-bright/70 transition-transform duration-1000 ease-out motion-reduce:scale-x-100 motion-reduce:transition-none ${
+              className={`block h-full origin-left bg-brand/60 transition-transform duration-1000 ease-out motion-reduce:scale-x-100 motion-reduce:transition-none ${
                 isVisible ? "scale-x-100" : "scale-x-0"
               }`}
             />
@@ -64,8 +63,8 @@ export function ProcessSteps() {
                 }`}
                 style={{ transitionDelay: `${index * 100}ms` }}
               >
-                <div className="group relative h-full rounded-xl border border-white bg-white p-5 shadow-lg shadow-black/10 transition-[transform,border-color,box-shadow] duration-300 ease-out hover:-translate-y-1 hover:border-brand-bright hover:shadow-xl hover:shadow-black/20 motion-reduce:transform-none motion-reduce:transition-none">
-                  <span className="absolute -left-10 top-5 flex size-7 items-center justify-center rounded-full bg-brand-bright text-xs font-semibold text-brand-deep shadow-sm sm:-left-2.5 sm:-top-2.5">
+                <div className="group relative h-full rounded-xl border border-border bg-white p-5 shadow-sm transition-[transform,border-color,box-shadow] duration-300 ease-out hover:-translate-y-1 hover:border-brand/50 hover:shadow-md motion-reduce:transform-none motion-reduce:transition-none">
+                  <span className="absolute -left-10 top-5 flex size-7 items-center justify-center rounded-full bg-brand text-xs font-semibold text-white shadow-sm sm:-left-2.5 sm:-top-2.5">
                     {index + 1}
                   </span>
                   <div
