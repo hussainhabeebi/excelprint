@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { ArrowRight } from "lucide-react";
 import { Hero } from "@/components/marketing/hero";
+import { PrintingCapabilities } from "@/components/marketing/printing-capabilities";
 import { ProcessSteps } from "@/components/marketing/process-steps";
 import { ProductGridReveal } from "@/components/marketing/product-grid-reveal";
 import { ProductCard } from "@/components/products/product-card";
@@ -72,6 +73,8 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
+
+      <PrintingCapabilities />
 
       <ProcessSteps />
 
