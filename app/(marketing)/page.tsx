@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { ArrowRight } from "lucide-react";
 import { Hero } from "@/components/marketing/hero";
 import { ProcessSteps } from "@/components/marketing/process-steps";
+import { ProductGridReveal } from "@/components/marketing/product-grid-reveal";
 import { ProductCard } from "@/components/products/product-card";
 import { CatalogProductCard } from "@/components/products/catalog-product-card";
 import { Button } from "@/components/ui/button";
@@ -74,37 +75,33 @@ export default async function HomePage() {
 
       <ProcessSteps />
 
-      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-        <div className="mb-8 flex items-end justify-between gap-4">
-          <div>
-            <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">Popular products</h2>
-            <p className="mt-2 text-muted-foreground">Configure specs, pricing updates instantly.</p>
+      <section className="bg-white">
+        <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
+          <div className="mb-8 flex flex-col items-start gap-5 sm:flex-row sm:items-end sm:justify-between">
+            <div className="max-w-2xl">
+              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-brand">Popular products</span>
+              <h2 className="mt-2 text-2xl font-bold tracking-tight text-slate-950 sm:text-3xl">Bring your ideas to print</h2>
+              <p className="mt-2 text-muted-foreground">
+                Choose a product, configure your specifications and see pricing instantly.
+              </p>
+            </div>
+            <Button asChild variant="outline" className="shrink-0 border-brand/25 text-brand hover:bg-brand/5">
+              <Link href="/products">
+                View all products
+                <ArrowRight />
+              </Link>
+            </Button>
           </div>
-          <Button asChild variant="ghost" className="hidden sm:inline-flex">
-            <Link href="/products">
-              View all products
-              <ArrowRight />
-            </Link>
-          </Button>
-        </div>
 
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-          {featuredProducts.length > 0
-            ? featuredProducts.map((product) => <CatalogProductCard key={product.id} product={product} />)
-            : // No products in the database yet (nothing seeded/added in admin) — fall back to
-              // the illustrative placeholder catalog so the homepage never looks broken.
-              POPULAR_PRODUCTS.filter((product) => HOMEPAGE_FALLBACK_PRODUCT_SLUGS.has(product.slug)).map((product) => (
-                <ProductCard key={product.slug} product={product} />
-              ))}
-        </div>
-
-        <div className="mt-8 flex justify-center sm:hidden">
-          <Button asChild variant="outline">
-            <Link href="/products">
-              View all products
-              <ArrowRight />
-            </Link>
-          </Button>
+          <ProductGridReveal>
+            {featuredProducts.length > 0
+              ? featuredProducts.map((product) => <CatalogProductCard key={product.id} product={product} />)
+              : // No products in the database yet (nothing seeded/added in admin) — fall back to
+                // the illustrative placeholder catalog so the homepage never looks broken.
+                POPULAR_PRODUCTS.filter((product) => HOMEPAGE_FALLBACK_PRODUCT_SLUGS.has(product.slug)).map((product) => (
+                  <ProductCard key={product.slug} product={product} />
+                ))}
+          </ProductGridReveal>
         </div>
       </section>
 
