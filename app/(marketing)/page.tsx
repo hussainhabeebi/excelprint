@@ -47,14 +47,28 @@ export default async function HomePage() {
     <>
       <Hero />
 
-      <section className="border-b border-border bg-background">
-        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-10 gap-y-3 px-4 py-6 sm:px-6 lg:px-8">
-          {TRUST_BADGES.map((badge) => (
-            <div key={badge.label} className="flex items-center gap-2 text-sm text-muted-foreground">
-              <badge.icon className="size-4 text-brand" />
-              {badge.label}
-            </div>
-          ))}
+      <section className="trust-ticker border-y border-white/10 bg-black text-white" aria-label="Excelprint benefits">
+        <div className="trust-ticker-viewport overflow-hidden" tabIndex={0}>
+          <div className="trust-ticker-track flex w-max">
+            {[false, true].map((isDuplicate) => (
+              <div
+                key={isDuplicate ? "duplicate" : "primary"}
+                className="trust-ticker-group flex shrink-0 items-center"
+                aria-hidden={isDuplicate ? "true" : undefined}
+              >
+                {TRUST_BADGES.map((badge) => (
+                  <div
+                    key={badge.label}
+                    className="flex shrink-0 items-center gap-2 px-5 py-3 text-xs font-medium tracking-wide sm:px-8 sm:text-sm lg:px-10"
+                  >
+                    <badge.icon className="size-4 shrink-0 text-sky-400" aria-hidden="true" />
+                    <span className="whitespace-nowrap">{badge.label}</span>
+                    <span className="ml-3 size-1.5 shrink-0 rounded-full bg-sky-400" aria-hidden="true" />
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
