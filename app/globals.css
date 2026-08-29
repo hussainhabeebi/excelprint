@@ -26,6 +26,7 @@
   /* Accessible UI green derived from the official logo's #7cc143. */
   --brand: #4f8426;
   --brand-bright: #9edb63;
+  --brand-deep: #244515;
   --brand-foreground: #ffffff;
 
   --destructive: #dc2626;
@@ -59,6 +60,7 @@
 
   --brand: #8dcc52;
   --brand-bright: #a7df72;
+  --brand-deep: #244515;
   --brand-foreground: #17200f;
 
   --destructive: #f87171;
@@ -84,6 +86,7 @@
   --color-accent-foreground: var(--accent-foreground);
   --color-brand: var(--brand);
   --color-brand-bright: var(--brand-bright);
+  --color-brand-deep: var(--brand-deep);
   --color-brand-foreground: var(--brand-foreground);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
