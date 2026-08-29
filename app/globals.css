@@ -106,3 +106,45 @@
     @apply bg-background text-foreground;
   }
 }
+
+
+@keyframes trust-ticker-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.trust-ticker-track {
+  animation: trust-ticker-scroll 30s linear infinite;
+}
+
+.trust-ticker:hover .trust-ticker-track,
+.trust-ticker:focus-within .trust-ticker-track {
+  animation-play-state: paused;
+}
+
+.trust-ticker-viewport {
+  scrollbar-width: none;
+}
+
+.trust-ticker-viewport::-webkit-scrollbar {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trust-ticker-viewport {
+    overflow-x: auto;
+  }
+
+  .trust-ticker-track {
+    animation: none;
+    transform: none;
+  }
+
+  .trust-ticker-group[aria-hidden="true"] {
+    display: none;
+  }
+}
