@@ -88,7 +88,7 @@ export default async function HomePage() {
                 Choose a product, configure your specifications and see pricing instantly.
               </p>
             </div>
-            <Button asChild variant="outline" className="shrink-0 border-brand/25 text-brand hover:bg-brand/5">
+            <Button asChild variant="brandOutline" className="shrink-0">
               <Link href="/products">
                 View all products
                 <ArrowRight />

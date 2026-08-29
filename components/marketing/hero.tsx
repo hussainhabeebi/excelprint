@@ -133,8 +133,7 @@ export function Hero() {
             </Button>
             <Button
               asChild
-              variant="outline"
-              className="border-white/80 bg-white/95 text-slate-900 hover:bg-white"
+              variant="brandOutline"
             >
               <Link href="/quote">Request Custom Quote</Link>
             </Button>

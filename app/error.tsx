@@ -23,7 +23,7 @@ export default function AppError({ reset }: { error: Error & { digest?: string }
         <Button onClick={() => reset()} variant="brand">
           Try again
         </Button>
-        <Button asChild variant="outline">
+        <Button asChild variant="brandOutline">
           <Link href="/">Back to home</Link>
         </Button>
       </div>

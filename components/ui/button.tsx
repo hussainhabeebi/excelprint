@@ -4,12 +4,15 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 outline-none focus-visible:ring-2 focus-visible:ring-ring",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium outline-none transition-[color,background-color,border-color,box-shadow] duration-[250ms] disabled:pointer-events-none disabled:opacity-50 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background motion-reduce:transition-none [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
         default: "bg-primary text-primary-foreground hover:bg-primary/90",
-        brand: "bg-brand text-brand-foreground hover:bg-brand/90",
+        brand:
+          "border border-brand bg-brand text-brand-foreground hover:bg-white hover:text-brand [&_svg]:transition-transform [&_svg]:duration-[250ms] hover:[&_svg]:translate-x-0.5 motion-reduce:[&_svg]:transform-none motion-reduce:[&_svg]:transition-none",
+        brandOutline:
+          "border border-brand bg-white text-brand hover:bg-brand hover:text-brand-foreground [&_svg]:transition-transform [&_svg]:duration-[250ms] hover:[&_svg]:translate-x-0.5 motion-reduce:[&_svg]:transform-none motion-reduce:[&_svg]:transition-none",
         destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
         outline: "border border-input bg-background hover:bg-secondary",
         secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
