@@ -13,17 +13,14 @@ const HERO_SLIDES = [
   {
     src: "/hero/hero-1.jpg",
     alt: "Professional large-format printer producing vibrant custom graphics",
-    position: "object-[52%_center] sm:object-[50%_center]",
   },
   {
     src: "/hero/hero-2.jpg",
     alt: "Large-format banner printing in progress at Excelprint",
-    position: "object-[50%_48%] sm:object-[50%_44%]",
   },
   {
     src: "/hero/hero-3.jpg",
     alt: "Professional commercial printing production facility",
-    position: "object-[50%_48%] sm:object-[50%_46%]",
   },
 ];
 
@@ -80,7 +77,7 @@ export function Hero() {
         if (!event.currentTarget.contains(event.relatedTarget)) setIsPaused(false);
       }}
     >
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 bg-slate-950">
         {HERO_SLIDES.map((slide, index) => (
           <div
             key={slide.src}
@@ -96,13 +93,13 @@ export function Hero() {
               priority={index === 0}
               quality={90}
               sizes="100vw"
-              className={`object-cover ${slide.position}`}
+              className="object-contain object-center"
             />
           </div>
         ))}
       </div>
 
-      <div className="absolute inset-0 bg-black/30" aria-hidden="true" />
+      <div className="absolute inset-0 bg-black/20" aria-hidden="true" />
 
       <div className="relative z-10 mx-auto flex min-h-[540px] max-w-7xl flex-col items-center justify-center px-4 py-7 text-center sm:min-h-[550px] sm:px-6 sm:py-8 lg:min-h-[570px] lg:px-8">
         <div className="mx-auto max-w-4xl">
