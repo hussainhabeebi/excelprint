@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
 import { CheckCircle2, CreditCard, Sliders, Truck, Upload } from "lucide-react";
 
 const STEPS = [
@@ -9,25 +12,74 @@ const STEPS = [
 ];
 
 export function ProcessSteps() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.2 },
+    );
+
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-      <div className="mb-10 max-w-2xl">
-        <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">How it works</h2>
-        <p className="mt-2 text-muted-foreground">
-          A straightforward path from idea to finished print — no back-and-forth emails required.
-        </p>
-      </div>
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
-        {STEPS.map((step, index) => (
-          <div key={step.title} className="relative rounded-xl border border-border p-5">
-            <span className="absolute -top-3 -left-3 flex h-7 w-7 items-center justify-center rounded-full bg-primary text-xs font-semibold text-primary-foreground">
-              {index + 1}
-            </span>
-            <step.icon className="size-6 text-brand" strokeWidth={1.75} />
-            <h3 className="mt-3 font-semibold">{step.title}</h3>
-            <p className="mt-1 text-sm text-muted-foreground">{step.description}</p>
+    <section ref={sectionRef} className="border-y border-slate-200 bg-slate-50/70">
+      <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
+        <div className="mx-auto mb-10 max-w-2xl text-center">
+          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-brand">Simple from start to finish</span>
+          <h2 className="mt-2 text-2xl font-semibold tracking-tight text-slate-950 sm:text-3xl">How it works</h2>
+          <p className="mt-2 text-muted-foreground">
+            A straightforward path from idea to finished print — no back-and-forth emails required.
+          </p>
+        </div>
+
+        <div className="relative pl-8 sm:pl-0">
+          <div className="absolute bottom-8 left-3.5 top-8 w-px bg-brand/20 sm:hidden" aria-hidden="true" />
+          <div className="absolute left-[10%] right-[10%] top-8 hidden h-px bg-brand/15 lg:block" aria-hidden="true">
+            <span
+              className={`block h-full origin-left bg-brand/60 transition-transform duration-1000 ease-out motion-reduce:scale-x-100 motion-reduce:transition-none ${
+                isVisible ? "scale-x-100" : "scale-x-0"
+              }`}
+            />
           </div>
-        ))}
+
+          <ol className="relative grid gap-5 sm:grid-cols-2 lg:grid-cols-5 lg:gap-4">
+            {STEPS.map((step, index) => (
+              <li
+                key={step.title}
+                className={`group relative rounded-xl border bg-white p-5 shadow-sm transition-[opacity,transform,border-color,box-shadow] duration-500 ease-out hover:-translate-y-1 hover:border-brand/40 hover:shadow-md motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none ${
+                  isVisible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
+                }`}
+                style={{ transitionDelay: `${index * 100}ms` }}
+              >
+                <span className="absolute -left-10 top-5 flex size-7 items-center justify-center rounded-full bg-brand text-xs font-semibold text-white shadow-sm sm:-left-2.5 sm:-top-2.5">
+                  {index + 1}
+                </span>
+                <div
+                  className={`flex size-11 items-center justify-center rounded-lg bg-brand/10 text-brand transition-transform duration-500 motion-reduce:scale-100 motion-reduce:transition-none ${
+                    isVisible ? "scale-100" : "scale-90"
+                  }`}
+                  style={{ transitionDelay: `${index * 100 + 100}ms` }}
+                >
+                  <step.icon className="size-5" strokeWidth={1.75} aria-hidden="true" />
+                </div>
+                <h3 className="mt-4 font-semibold text-slate-950">{step.title}</h3>
+                <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{step.description}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
       </div>
     </section>
   );

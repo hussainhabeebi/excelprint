@@ -72,6 +72,8 @@ export default async function HomePage() {
         </div>
       </section>
 
+      <ProcessSteps />
+
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="mb-8 flex items-end justify-between gap-4">
           <div>
@@ -105,8 +107,6 @@ export default async function HomePage() {
           </Button>
         </div>
       </section>
-
-      <ProcessSteps />
 
       <section className="border-t border-border bg-primary text-primary-foreground">
         <div className="mx-auto flex max-w-7xl flex-col items-center gap-4 px-4 py-16 text-center sm:px-6 lg:px-8">
