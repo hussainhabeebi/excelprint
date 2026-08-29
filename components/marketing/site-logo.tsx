@@ -1,20 +1,18 @@
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 
-export function SiteLogo({ className, iconSize = 32 }: { className?: string; iconSize?: number }) {
+export function SiteLogo({ className, priority = false }: { className?: string; priority?: boolean }) {
   return (
-    <span className={cn("flex items-center gap-2", className)}>
+    <span className={cn("inline-flex items-center", className)}>
       <Image
-        src="/logo-mark.png"
-        alt=""
-        width={iconSize}
-        height={iconSize}
-        priority
-        className="shrink-0"
+        src="/logo/logo.png"
+        alt="Excel Printing"
+        width={1324}
+        height={809}
+        priority={priority}
+        sizes="(min-width: 640px) 124px, 104px"
+        className="h-auto w-[104px] shrink-0 sm:w-[124px]"
       />
-      <span className="text-lg font-semibold tracking-tight">
-        Excel<span className="text-brand">Print</span>
-      </span>
     </span>
   );
 }

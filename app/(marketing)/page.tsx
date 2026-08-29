@@ -62,9 +62,9 @@ export default async function HomePage() {
                     key={badge.label}
                     className="flex shrink-0 items-center gap-2 px-5 py-3 text-xs font-medium tracking-wide sm:px-8 sm:text-sm lg:px-10"
                   >
-                    <badge.icon className="size-4 shrink-0 text-sky-400" aria-hidden="true" />
+                    <badge.icon className="size-4 shrink-0 text-brand-bright" aria-hidden="true" />
                     <span className="whitespace-nowrap">{badge.label}</span>
-                    <span className="ml-3 size-1.5 shrink-0 rounded-full bg-sky-400" aria-hidden="true" />
+                    <span className="ml-3 size-1.5 shrink-0 rounded-full bg-brand-bright" aria-hidden="true" />
                   </div>
                 ))}
               </div>
@@ -80,7 +80,7 @@ export default async function HomePage() {
           <div className="mx-auto mb-10 flex max-w-2xl flex-col items-center gap-5 text-center">
             <div className="max-w-2xl">
               <span className="text-xs font-semibold uppercase tracking-[0.2em] text-brand">Popular products</span>
-              <h2 className="mt-2 text-2xl font-bold tracking-tight text-slate-950 sm:text-3xl">Bring your ideas to print</h2>
+              <h2 className="mt-2 text-2xl font-bold tracking-tight text-foreground sm:text-3xl">Bring your ideas to print</h2>
               <p className="mt-2 text-muted-foreground">
                 Choose a product, configure your specifications and see pricing instantly.
               </p>

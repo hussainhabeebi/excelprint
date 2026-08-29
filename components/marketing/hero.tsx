@@ -112,7 +112,7 @@ export function Hero() {
 
           <h1 className="mt-3 text-[1.75rem] font-bold leading-tight tracking-tight text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.65)] sm:text-3xl lg:text-4xl lg:leading-[1.12]">
             Print{" "}
-            <span className="text-sky-300">
+            <span className="text-brand-bright">
               <TypewriterText words={ROTATING_PRODUCTS} />
             </span>
             <br />
@@ -147,7 +147,7 @@ export function Hero() {
               key={item.label}
               className="flex items-center justify-center gap-1.5 text-[11px] font-medium leading-tight text-white drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)] sm:gap-2 sm:text-xs"
             >
-              <item.icon className="size-4 shrink-0 text-sky-300" />
+              <item.icon className="size-4 shrink-0 text-brand-bright" />
               <span>{item.label}</span>
             </li>
           ))}

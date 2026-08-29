@@ -6,34 +6,34 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #14171f;
+  --foreground: #231f20;
 
   --card: #ffffff;
-  --card-foreground: #14171f;
+  --card-foreground: #231f20;
 
-  --primary: #14171f;
+  --primary: #231f20;
   --primary-foreground: #ffffff;
 
-  --secondary: #f4f5f7;
-  --secondary-foreground: #14171f;
+  --secondary: #f5f7f3;
+  --secondary-foreground: #231f20;
 
-  --muted: #f4f5f7;
-  --muted-foreground: #667085;
+  --muted: #f3f5f1;
+  --muted-foreground: #646b60;
 
-  --accent: #e0e7ff;
-  --accent-foreground: #1e2a78;
+  --accent: #edf6e7;
+  --accent-foreground: #315719;
 
-  /* Brand accent — a confident indigo used for primary CTAs, links, and
-   * focus states. Swap once official brand colors are supplied. */
-  --brand: #2f3fd8;
+  /* Accessible UI green derived from the official logo's #7cc143. */
+  --brand: #4f8426;
+  --brand-bright: #9edb63;
   --brand-foreground: #ffffff;
 
   --destructive: #dc2626;
   --destructive-foreground: #ffffff;
 
-  --border: #e4e6eb;
-  --input: #e4e6eb;
-  --ring: #2f3fd8;
+  --border: #dfe4dc;
+  --input: #dfe4dc;
+  --ring: #4f8426;
 
   --radius: 0.625rem;
 }
@@ -46,7 +46,7 @@
   --card-foreground: #f4f5f7;
 
   --primary: #f4f5f7;
-  --primary-foreground: #14171f;
+  --primary-foreground: #231f20;
 
   --secondary: #1b1e27;
   --secondary-foreground: #f4f5f7;
@@ -54,18 +54,19 @@
   --muted: #1b1e27;
   --muted-foreground: #9aa1b1;
 
-  --accent: #1e2a78;
-  --accent-foreground: #dfe4ff;
+  --accent: #26361e;
+  --accent-foreground: #dff2d0;
 
-  --brand: #6a76ff;
-  --brand-foreground: #0b0d12;
+  --brand: #8dcc52;
+  --brand-bright: #a7df72;
+  --brand-foreground: #17200f;
 
   --destructive: #f87171;
-  --destructive-foreground: #14171f;
+  --destructive-foreground: #231f20;
 
   --border: #242835;
   --input: #242835;
-  --ring: #6a76ff;
+  --ring: #8dcc52;
 }
 
 @theme inline {
@@ -82,6 +83,7 @@
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
   --color-brand: var(--brand);
+  --color-brand-bright: var(--brand-bright);
   --color-brand-foreground: var(--brand-foreground);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);

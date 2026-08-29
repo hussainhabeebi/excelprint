@@ -12,9 +12,9 @@ export function CatalogProductCard({ product }: { product: CatalogProductSummary
 
   return (
     <Link href={`/product/${product.slug}`} className="group block h-full rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2">
-      <Card className="h-full overflow-hidden border-slate-200 py-0 shadow-sm transition-[transform,border-color,box-shadow] duration-300 ease-out hover:-translate-y-1.5 hover:border-brand/40 hover:shadow-lg motion-reduce:transform-none motion-reduce:transition-none">
+      <Card className="h-full overflow-hidden border-border py-0 shadow-sm transition-[transform,border-color,box-shadow] duration-300 ease-out hover:-translate-y-1.5 hover:border-brand/40 hover:shadow-lg motion-reduce:transform-none motion-reduce:transition-none">
         {productImage ? (
-          <div className="relative aspect-[4/3] w-full overflow-hidden bg-slate-100">
+          <div className="relative aspect-[4/3] w-full overflow-hidden bg-muted">
             <Image
               src={productImage.src}
               alt={productImage.alt}
@@ -28,11 +28,11 @@ export function CatalogProductCard({ product }: { product: CatalogProductSummary
         )}
         <div className="flex flex-1 flex-col p-5">
           <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-brand">{product.categoryName}</p>
-          <h3 className="mt-1.5 text-base font-semibold leading-snug text-slate-950">{product.name}</h3>
+          <h3 className="mt-1.5 text-base font-semibold leading-snug text-foreground">{product.name}</h3>
           {product.shortDescription && (
             <p className="mt-2 min-h-10 line-clamp-2 text-sm leading-relaxed text-muted-foreground">{product.shortDescription}</p>
           )}
-          <div className="mt-auto flex items-end justify-between gap-3 border-t border-slate-100 pt-4">
+          <div className="mt-auto flex items-end justify-between gap-3 border-t border-border/60 pt-4">
             <div>
               <p className="text-sm text-muted-foreground">
                 From <span className="font-semibold text-foreground">{formatMoneyAed(product.startingPriceCents)}</span>

@@ -34,11 +34,11 @@ export function ProcessSteps() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="border-y border-slate-200 bg-slate-50/70">
+    <section ref={sectionRef} className="border-y border-border bg-secondary/60">
       <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
         <div className="mx-auto mb-10 max-w-2xl text-center">
           <span className="text-xs font-semibold uppercase tracking-[0.2em] text-brand">Simple from start to finish</span>
-          <h2 className="mt-2 text-2xl font-semibold tracking-tight text-slate-950 sm:text-3xl">How it works</h2>
+          <h2 className="mt-2 text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">How it works</h2>
           <p className="mt-2 text-muted-foreground">
             A straightforward path from idea to finished print — no back-and-forth emails required.
           </p>
@@ -74,7 +74,7 @@ export function ProcessSteps() {
                 >
                   <step.icon className="size-5" strokeWidth={1.75} aria-hidden="true" />
                 </div>
-                <h3 className="mt-4 font-semibold text-slate-950">{step.title}</h3>
+                <h3 className="mt-4 font-semibold text-foreground">{step.title}</h3>
                 <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{step.description}</p>
               </li>
             ))}
