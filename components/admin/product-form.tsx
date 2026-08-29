@@ -55,6 +55,23 @@ export function ProductForm({ action, product, categories }: ProductFormProps) {
       </div>
 
       <div className="space-y-2">
+        <Label htmlFor="purchaseMode">Purchase Mode</Label>
+        <select
+          id="purchaseMode"
+          name="purchaseMode"
+          defaultValue={product?.purchaseMode ?? "CONFIGURABLE"}
+          required
+          className="flex h-11 w-full rounded-md border border-input bg-background px-3 text-sm shadow-xs outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        >
+          <option value="CONFIGURABLE">Configurable / Online Order</option>
+          <option value="QUOTE_ONLY">Request Quote</option>
+        </select>
+        <p className="text-xs text-muted-foreground">
+          Quote-only products skip online configuration and do not show a starting price.
+        </p>
+      </div>
+
+      <div className="space-y-2">
         <Label htmlFor="shortDescription">Short description</Label>
         <Input id="shortDescription" name="shortDescription" defaultValue={product?.shortDescription ?? ""} />
         <p className="text-xs text-muted-foreground">Shown on product cards.</p>
@@ -76,7 +93,9 @@ export function ProductForm({ action, product, categories }: ProductFormProps) {
             defaultValue={product?.startingPriceCents ?? 0}
             required
           />
-          <p className="text-xs text-muted-foreground">e.g. 4500 = AED 45.00</p>
+          <p className="text-xs text-muted-foreground">
+            e.g. 4500 = AED 45.00. This value is not displayed for quote-only products.
+          </p>
         </div>
         <div className="space-y-2">
           <Label htmlFor="productionTimeStandardDays">Standard days</Label>

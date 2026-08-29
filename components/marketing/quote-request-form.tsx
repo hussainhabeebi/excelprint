@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 
-export function QuoteRequestForm() {
+export function QuoteRequestForm({ initialServiceName }: { initialServiceName?: string }) {
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
@@ -85,7 +85,13 @@ export function QuoteRequestForm() {
 
       <div className="space-y-2">
         <Label htmlFor="productDescription">What do you need printed?</Label>
-        <Textarea id="productDescription" name="productDescription" rows={3} required />
+        <Textarea
+          id="productDescription"
+          name="productDescription"
+          rows={3}
+          defaultValue={initialServiceName}
+          required
+        />
       </div>
 
       <div className="grid gap-4 sm:grid-cols-3">

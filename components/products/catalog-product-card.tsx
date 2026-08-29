@@ -34,16 +34,18 @@ export function CatalogProductCard({ product }: { product: CatalogProductSummary
           )}
           <div className="mt-auto flex items-end justify-between gap-3 border-t border-border/60 pt-4">
             <div>
-              <p className="text-sm text-muted-foreground">
-                From <span className="font-semibold text-foreground">{formatMoneyAed(product.startingPriceCents)}</span>
-              </p>
+              {product.purchaseMode === "CONFIGURABLE" && (
+                <p className="text-sm text-muted-foreground">
+                  From <span className="font-semibold text-foreground">{formatMoneyAed(product.startingPriceCents)}</span>
+                </p>
+              )}
               <p className="flex items-center gap-1 text-xs text-muted-foreground">
                 <Clock className="size-3" />
                 {product.productionTimeStandardDays} day{product.productionTimeStandardDays === 1 ? "" : "s"}
               </p>
             </div>
             <span className="flex items-center gap-1 text-sm font-semibold text-brand transition-colors">
-              Configure
+              {product.purchaseMode === "QUOTE_ONLY" ? "Request Quote" : "Configure"}
               <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-0.5 motion-reduce:transform-none motion-reduce:transition-none" />
             </span>
           </div>

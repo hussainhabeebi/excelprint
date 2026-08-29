@@ -11,7 +11,14 @@ export async function getConfiguratorSchema(slug: string): Promise<ConfiguratorS
   const [product] = await db
     .select()
     .from(products)
-    .where(and(eq(products.slug, slug), eq(products.isActive, true), isNull(products.deletedAt)))
+    .where(
+      and(
+        eq(products.slug, slug),
+        eq(products.purchaseMode, "CONFIGURABLE"),
+        eq(products.isActive, true),
+        isNull(products.deletedAt),
+      ),
+    )
     .limit(1);
   if (!product) return null;
 

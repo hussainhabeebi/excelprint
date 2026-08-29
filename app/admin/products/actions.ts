@@ -17,6 +17,7 @@ function parseFormData(formData: FormData) {
     slug: formData.get("slug"),
     description: formData.get("description") || undefined,
     shortDescription: formData.get("shortDescription") || undefined,
+    purchaseMode: formData.get("purchaseMode") || "CONFIGURABLE",
     startingPriceCents: formData.get("startingPriceCents") || 0,
     currency: formData.get("currency") || "AED",
     productionTimeStandardDays: formData.get("productionTimeStandardDays") || 3,

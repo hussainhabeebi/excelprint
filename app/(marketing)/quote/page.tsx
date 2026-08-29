@@ -2,10 +2,18 @@ import type { Metadata } from "next";
 import { Phone, Mail, MessageCircle } from "lucide-react";
 import { QuoteRequestForm } from "@/components/marketing/quote-request-form";
 import { businessConfig } from "@/lib/config/business";
+import { getProductBySlug } from "@/lib/catalog/queries";
 
 export const metadata: Metadata = { title: "Request a Quote" };
 
-export default function QuotePage() {
+export default async function QuotePage({
+  searchParams,
+}: {
+  searchParams: Promise<{ service?: string }>;
+}) {
+  const { service } = await searchParams;
+  const selectedProduct = service ? await getProductBySlug(service) : null;
+  const initialServiceName = selectedProduct?.purchaseMode === "QUOTE_ONLY" ? selectedProduct.name : undefined;
   const hasContactInfo = businessConfig.phone || businessConfig.whatsapp || businessConfig.email;
 
   return (
@@ -19,7 +27,7 @@ export default function QuotePage() {
 
       <div className="mt-10 grid gap-10 lg:grid-cols-3">
         <div className="lg:col-span-2">
-          <QuoteRequestForm />
+          <QuoteRequestForm initialServiceName={initialServiceName} />
         </div>
 
         {hasContactInfo && (

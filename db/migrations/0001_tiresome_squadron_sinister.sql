@@ -1,0 +1,1 @@
+ALTER TABLE `products` ADD `purchase_mode` text DEFAULT 'CONFIGURABLE' NOT NULL;

@@ -16,11 +16,14 @@ export interface CatalogCategory {
   isActive: boolean;
 }
 
+export type PurchaseMode = "CONFIGURABLE" | "QUOTE_ONLY";
+
 export interface CatalogProductSummary {
   id: string;
   name: string;
   slug: string;
   shortDescription: string | null;
+  purchaseMode: PurchaseMode;
   startingPriceCents: number;
   currency: string;
   productionTimeStandardDays: number;

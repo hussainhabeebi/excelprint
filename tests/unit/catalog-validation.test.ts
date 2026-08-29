@@ -53,6 +53,32 @@ describe("productInputSchema", () => {
     if (result.success) {
       expect(result.data.currency).toBe("AED");
       expect(result.data.productionTimeStandardDays).toBe(3);
+      expect(result.data.purchaseMode).toBe("CONFIGURABLE");
     }
+  });
+
+  it("accepts quote-only products", () => {
+    const result = productInputSchema.safeParse({
+      categoryId: "cat_1",
+      name: "Laser Engraving",
+      slug: "laser-engraving",
+      purchaseMode: "QUOTE_ONLY",
+      startingPriceCents: 0,
+    });
+
+    expect(result.success).toBe(true);
+    if (result.success) expect(result.data.purchaseMode).toBe("QUOTE_ONLY");
+  });
+
+  it("rejects unknown purchase modes", () => {
+    const result = productInputSchema.safeParse({
+      categoryId: "cat_1",
+      name: "Laser Engraving",
+      slug: "laser-engraving",
+      purchaseMode: "OFFLINE_ONLY",
+      startingPriceCents: 0,
+    });
+
+    expect(result.success).toBe(false);
   });
 });

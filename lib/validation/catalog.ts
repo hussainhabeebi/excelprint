@@ -25,6 +25,7 @@ export const productInputSchema = z.object({
   slug: slugSchema,
   description: z.string().trim().max(5000).optional(),
   shortDescription: z.string().trim().max(300).optional(),
+  purchaseMode: z.enum(["CONFIGURABLE", "QUOTE_ONLY"]).default("CONFIGURABLE"),
   startingPriceCents: z.coerce.number().int().min(0),
   currency: z.string().trim().length(3).default("AED"),
   productionTimeStandardDays: z.coerce.number().int().min(0).default(3),

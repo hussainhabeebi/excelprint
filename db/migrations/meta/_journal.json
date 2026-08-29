@@ -8,6 +8,13 @@
       "when": 1786414514455,
       "tag": "0000_init_schema",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1788003394595,
+      "tag": "0001_tiresome_squadron_sinister",
+      "breakpoints": true
     }
   ]
 }

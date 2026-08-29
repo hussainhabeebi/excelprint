@@ -26,6 +26,9 @@ export const products = sqliteTable("products", {
   slug: text("slug").notNull(),
   description: text("description"),
   shortDescription: text("short_description"),
+  purchaseMode: text("purchase_mode", { enum: ["CONFIGURABLE", "QUOTE_ONLY"] })
+    .notNull()
+    .default("CONFIGURABLE"),
   startingPriceCents: integer("starting_price_cents").notNull().default(0),
   currency: text("currency").notNull().default("AED"),
   productionTimeStandardDays: integer("production_time_standard_days").notNull().default(3),

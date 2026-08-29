@@ -51,10 +51,12 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
           <h1 className="text-3xl font-semibold tracking-tight">{product.name}</h1>
           {product.shortDescription && <p className="mt-2 text-lg text-muted-foreground">{product.shortDescription}</p>}
 
-          <div className="mt-6 flex items-baseline gap-2">
-            <span className="text-sm text-muted-foreground">Starting from</span>
-            <span className="text-2xl font-semibold">{formatMoneyAed(product.startingPriceCents)}</span>
-          </div>
+          {product.purchaseMode === "CONFIGURABLE" && (
+            <div className="mt-6 flex items-baseline gap-2">
+              <span className="text-sm text-muted-foreground">Starting from</span>
+              <span className="text-2xl font-semibold">{formatMoneyAed(product.startingPriceCents)}</span>
+            </div>
+          )}
 
           <p className="mt-2 flex items-center gap-1.5 text-sm text-muted-foreground">
             <Clock className="size-4" />
@@ -66,10 +68,17 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
           </p>
 
           <Button asChild size="lg" variant="brand" className="mt-8 w-full sm:w-auto">
-            <Link href={`/configure/${product.slug}`}>
-              Configure &amp; See Price
-              <ArrowRight />
-            </Link>
+            {product.purchaseMode === "QUOTE_ONLY" ? (
+              <Link href={`/quote?service=${encodeURIComponent(product.slug)}`}>
+                Request Quote
+                <ArrowRight />
+              </Link>
+            ) : (
+              <Link href={`/configure/${product.slug}`}>
+                Configure &amp; See Price
+                <ArrowRight />
+              </Link>
+            )}
           </Button>
 
           {product.description && (
