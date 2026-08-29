@@ -34,7 +34,7 @@ export function ProcessSteps() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="border-y border-brand/15 bg-[#68BB59]">
+    <section ref={sectionRef} className="border-y border-brand/15 bg-[#AFE584]">
       <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
         <div className="mx-auto mb-10 max-w-2xl text-center">
           <span className="text-xs font-semibold uppercase tracking-[0.2em] text-brand">Simple from start to finish</span>
