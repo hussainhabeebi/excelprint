@@ -77,7 +77,7 @@ export default async function HomePage() {
 
       <section className="bg-white">
         <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
-          <div className="mb-8 flex flex-col items-start gap-5 sm:flex-row sm:items-end sm:justify-between">
+          <div className="mx-auto mb-10 flex max-w-2xl flex-col items-center gap-5 text-center">
             <div className="max-w-2xl">
               <span className="text-xs font-semibold uppercase tracking-[0.2em] text-brand">Popular products</span>
               <h2 className="mt-2 text-2xl font-bold tracking-tight text-slate-950 sm:text-3xl">Bring your ideas to print</h2>
