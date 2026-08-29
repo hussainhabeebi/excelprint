@@ -5,8 +5,6 @@ import { Hero } from "@/components/marketing/hero";
 import { PrintingCapabilities } from "@/components/marketing/printing-capabilities";
 import { ProcessSteps } from "@/components/marketing/process-steps";
 import { ProductGridReveal } from "@/components/marketing/product-grid-reveal";
-import { ProductCard } from "@/components/products/product-card";
-import { CatalogProductCard } from "@/components/products/catalog-product-card";
 import { Button } from "@/components/ui/button";
 import { POPULAR_PRODUCTS, TRUST_BADGES } from "@/lib/config/popular-products";
 import { listProducts } from "@/lib/catalog/queries";
@@ -40,6 +38,31 @@ async function getFeaturedProductsSafely() {
     console.error("Failed to load featured products for homepage", error);
     return [];
   }
+}
+
+function HomepageProductCard({
+  product,
+}: {
+  product: { slug: string; name: string; categoryName?: string };
+}) {
+  return (
+    <Link
+      href={`/product/${product.slug}`}
+      className="group flex min-h-28 h-full items-center justify-between gap-4 rounded-xl border border-border bg-white px-5 py-5 shadow-sm transition-[transform,background-color,border-color,box-shadow] duration-300 ease-out hover:-translate-y-1 hover:border-brand hover:bg-brand hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 motion-reduce:transform-none motion-reduce:transition-none"
+    >
+      <span className="min-w-0">
+        {product.categoryName && (
+          <span className="block text-[11px] font-semibold uppercase tracking-[0.14em] text-brand transition-colors duration-300 group-hover:text-white/80">
+            {product.categoryName}
+          </span>
+        )}
+        <span className={`${product.categoryName ? "mt-1.5" : ""} block text-base font-semibold leading-snug text-foreground transition-colors duration-300 group-hover:text-white sm:text-lg`}>
+          {product.name}
+        </span>
+      </span>
+      <ArrowRight className="size-5 shrink-0 text-brand transition-[color,transform] duration-300 group-hover:translate-x-1 group-hover:text-white motion-reduce:transform-none motion-reduce:transition-none" aria-hidden="true" />
+    </Link>
+  );
 }
 
 export default async function HomePage() {
@@ -82,10 +105,10 @@ export default async function HomePage() {
         <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
           <div className="mx-auto mb-10 flex max-w-2xl flex-col items-center gap-5 text-center">
             <div className="max-w-2xl">
-              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-brand">Popular products</span>
-              <h2 className="mt-2 text-2xl font-bold tracking-tight text-foreground sm:text-3xl">Bring your ideas to print</h2>
+              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-brand">Our products &amp; services</span>
+              <h2 className="mt-2 text-2xl font-bold tracking-tight text-foreground sm:text-3xl">Everything You Need, Printed Right</h2>
               <p className="mt-2 text-muted-foreground">
-                Choose a product, configure your specifications and see pricing instantly.
+                Explore our complete range of printing, branding and custom production services.
               </p>
             </div>
             <Button asChild variant="brandOutline" className="shrink-0">
@@ -98,11 +121,11 @@ export default async function HomePage() {
 
           <ProductGridReveal>
             {featuredProducts.length > 0
-              ? featuredProducts.map((product) => <CatalogProductCard key={product.id} product={product} />)
+              ? featuredProducts.map((product) => <HomepageProductCard key={product.id} product={product} />)
               : // No products in the database yet (nothing seeded/added in admin) — fall back to
                 // the illustrative placeholder catalog so the homepage never looks broken.
                 POPULAR_PRODUCTS.filter((product) => HOMEPAGE_FALLBACK_PRODUCT_SLUGS.has(product.slug)).map((product) => (
-                  <ProductCard key={product.slug} product={product} />
+                  <HomepageProductCard key={product.slug} product={product} />
                 ))}
           </ProductGridReveal>
         </div>
