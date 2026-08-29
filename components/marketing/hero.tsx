@@ -13,14 +13,17 @@ const HERO_SLIDES = [
   {
     src: "/hero/hero-1.jpg",
     alt: "Professional large-format printer producing vibrant custom graphics",
+    position: "object-[52%_center] sm:object-center",
   },
   {
     src: "/hero/hero-2.jpg",
     alt: "Large-format banner printing in progress at Excelprint",
+    position: "object-center",
   },
   {
     src: "/hero/hero-3.jpg",
     alt: "Professional commercial printing production facility",
+    position: "object-[55%_center] sm:object-center",
   },
 ];
 
@@ -67,7 +70,7 @@ export function Hero() {
 
   return (
     <section
-      className="relative isolate min-h-[540px] overflow-hidden border-b border-border sm:min-h-[550px] lg:min-h-[570px]"
+      className="relative isolate h-[520px] overflow-hidden border-b border-border sm:h-[540px] lg:h-[560px]"
       aria-roledescription="carousel"
       aria-label="Excelprint printing services"
       onMouseEnter={() => setIsPaused(true)}
@@ -77,7 +80,7 @@ export function Hero() {
         if (!event.currentTarget.contains(event.relatedTarget)) setIsPaused(false);
       }}
     >
-      <div className="absolute inset-0 bg-slate-950">
+      <div className="absolute inset-0">
         {HERO_SLIDES.map((slide, index) => (
           <div
             key={slide.src}
@@ -93,21 +96,21 @@ export function Hero() {
               priority={index === 0}
               quality={90}
               sizes="100vw"
-              className="object-contain object-center"
+              className={`object-cover ${slide.position}`}
             />
           </div>
         ))}
       </div>
 
-      <div className="absolute inset-0 bg-black/20" aria-hidden="true" />
+      <div className="absolute inset-0 bg-black/35" aria-hidden="true" />
 
-      <div className="relative z-10 mx-auto flex min-h-[540px] max-w-7xl flex-col items-center justify-center px-4 py-7 text-center sm:min-h-[550px] sm:px-6 sm:py-8 lg:min-h-[570px] lg:px-8">
+      <div className="relative z-10 mx-auto flex h-full max-w-7xl -translate-y-2 flex-col items-center justify-center px-4 py-6 text-center sm:-translate-y-3 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-4xl">
           <span className="inline-flex items-center rounded-full border border-white/35 bg-black/25 px-3 py-1 text-xs font-medium text-white shadow-sm">
             Printing &amp; branding in Ajman, UAE
           </span>
 
-          <h1 className="mt-4 text-3xl font-bold tracking-tight text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.65)] sm:text-4xl lg:text-5xl lg:leading-[1.08]">
+          <h1 className="mt-3 text-[1.75rem] font-bold leading-tight tracking-tight text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.65)] sm:text-3xl lg:text-4xl lg:leading-[1.12]">
             Print{" "}
             <span className="text-sky-300">
               <TypewriterText words={ROTATING_PRODUCTS} />
@@ -116,13 +119,13 @@ export function Hero() {
             Design It. Approve It. Get It Delivered.
           </h1>
 
-          <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-white/95 drop-shadow-[0_1px_5px_rgba(0,0,0,0.75)] sm:text-base lg:text-lg">
+          <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-white/95 drop-shadow-[0_1px_5px_rgba(0,0,0,0.75)] sm:text-base">
             Professional printing, custom design and fast production in Ajman. Configure your job, see the price
             instantly, and approve your proof before it ever goes to press.
           </p>
 
-          <div className="mt-5 flex flex-col justify-center gap-3 min-[380px]:flex-row">
-            <Button asChild size="lg" variant="brand">
+          <div className="mt-4 flex flex-col justify-center gap-2.5 min-[380px]:flex-row">
+            <Button asChild variant="brand">
               <Link href="/products">
                 Start Your Order
                 <ArrowRight />
@@ -130,7 +133,6 @@ export function Hero() {
             </Button>
             <Button
               asChild
-              size="lg"
               variant="outline"
               className="border-white/80 bg-white/95 text-slate-900 hover:bg-white"
             >
@@ -139,11 +141,11 @@ export function Hero() {
           </div>
         </div>
 
-        <ul className="mt-5 grid w-full max-w-4xl grid-cols-2 gap-2 sm:grid-cols-4">
+        <ul className="mt-5 grid w-full max-w-3xl grid-cols-2 gap-x-5 gap-y-3 sm:grid-cols-4">
           {FEATURE_STRIP.map((item) => (
             <li
               key={item.label}
-              className="flex min-h-10 items-center justify-center gap-1.5 rounded-full border border-white/20 bg-black/30 px-2 py-2 text-[11px] font-medium leading-tight text-white shadow-sm sm:gap-2 sm:px-3 sm:text-xs"
+              className="flex items-center justify-center gap-1.5 text-[11px] font-medium leading-tight text-white drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)] sm:gap-2 sm:text-xs"
             >
               <item.icon className="size-4 shrink-0 text-sky-300" />
               <span>{item.label}</span>
