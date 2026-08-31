@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 import { ArrowRight } from "lucide-react";
 import { Hero } from "@/components/marketing/hero";
@@ -7,6 +8,8 @@ import { ProcessSteps } from "@/components/marketing/process-steps";
 import { ProductGridReveal } from "@/components/marketing/product-grid-reveal";
 import { WhyChooseExcelprint } from "@/components/marketing/why-choose-excelprint";
 import { ContactExcelprint } from "@/components/marketing/contact-excelprint";
+import { ProductIllustration } from "@/components/products/product-illustration";
+import { PRODUCT_IMAGES } from "@/components/products/product-images";
 import { Button } from "@/components/ui/button";
 import { POPULAR_PRODUCTS, TRUST_BADGES } from "@/lib/config/popular-products";
 import { listProducts } from "@/lib/catalog/queries";
@@ -47,22 +50,42 @@ function HomepageProductCard({
 }: {
   product: { slug: string; name: string; categoryName?: string };
 }) {
+  const productImage = PRODUCT_IMAGES[product.slug];
+
   return (
     <Link
       href={`/product/${product.slug}`}
-      className="group flex min-h-28 h-full items-center justify-between gap-4 rounded-xl border border-border bg-white px-5 py-5 shadow-sm transition-[transform,background-color,border-color,box-shadow] duration-300 ease-out hover:-translate-y-1 hover:border-brand hover:bg-brand hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 motion-reduce:transform-none motion-reduce:transition-none"
+      className="group block h-full overflow-hidden rounded-xl border border-border bg-white shadow-sm transition-[transform,border-color,box-shadow] duration-300 ease-out hover:-translate-y-1 hover:border-brand/60 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 motion-reduce:transform-none motion-reduce:transition-none"
     >
-      <span className="min-w-0">
-        {product.categoryName && (
-          <span className="block text-[11px] font-semibold uppercase tracking-[0.14em] text-brand transition-colors duration-300 group-hover:text-white/80">
-            {product.categoryName}
-          </span>
+      <div className="relative aspect-[4/3] w-full overflow-hidden bg-muted">
+        {productImage ? (
+          <Image
+            src={productImage.src}
+            alt={productImage.alt}
+            fill
+            sizes="(min-width: 1280px) 280px, (min-width: 1024px) 25vw, (min-width: 768px) 33vw, (min-width: 430px) 50vw, 100vw"
+            className="object-cover transition-transform duration-300 ease-out group-hover:scale-[1.025] motion-reduce:transform-none motion-reduce:transition-none"
+          />
+        ) : (
+          <ProductIllustration slug={product.slug} className="size-full" />
         )}
-        <span className={`${product.categoryName ? "mt-1.5" : ""} block text-base font-semibold leading-snug text-foreground transition-colors duration-300 group-hover:text-white sm:text-lg`}>
-          {product.name}
+      </div>
+      <div className="flex items-end justify-between gap-3 p-4 sm:p-5">
+        <span className="min-w-0">
+          {product.categoryName && (
+            <span className="block truncate text-[11px] font-semibold uppercase tracking-[0.14em] text-brand">
+              {product.categoryName}
+            </span>
+          )}
+          <span className={`${product.categoryName ? "mt-1" : ""} block text-base font-semibold leading-snug text-foreground`}>
+            {product.name}
+          </span>
         </span>
-      </span>
-      <ArrowRight className="size-5 shrink-0 text-brand transition-[color,transform] duration-300 group-hover:translate-x-1 group-hover:text-white motion-reduce:transform-none motion-reduce:transition-none" aria-hidden="true" />
+        <span className="flex shrink-0 items-center gap-1 text-xs font-semibold text-brand sm:text-sm">
+          <span className="hidden sm:inline">View Product</span>
+          <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transform-none motion-reduce:transition-none" aria-hidden="true" />
+        </span>
+      </div>
     </Link>
   );
 }
