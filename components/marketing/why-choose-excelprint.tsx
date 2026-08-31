@@ -61,21 +61,30 @@ export function WhyChooseExcelprint() {
           </p>
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4">
           {BENEFITS.map((benefit, index) => (
             <article
               key={benefit.title}
-              className={`group relative overflow-hidden rounded-xl border border-border bg-white p-5 shadow-sm transition-[opacity,transform,border-color,box-shadow] duration-300 ease-out hover:-translate-y-1 hover:border-brand/50 hover:shadow-md motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none ${
+              className={`group flex flex-col items-center border-b border-brand/15 px-4 py-8 text-center transition-[opacity,transform] duration-300 ease-out last:border-b-0 sm:border-b-0 sm:px-8 sm:py-9 lg:px-7 ${
+                index < 2 ? "sm:border-b lg:border-b-0" : ""
+              } ${index % 2 === 0 ? "sm:border-r" : ""} ${index === 1 ? "lg:border-r" : ""} ${
                 isVisible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
-              }`}
+              } motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none`}
               style={{ transitionDelay: `${index * 80}ms` }}
             >
-              <span className="absolute inset-x-0 top-0 h-1 bg-brand" aria-hidden="true" />
-              <div className="flex size-10 items-center justify-center rounded-lg bg-accent text-brand transition-transform duration-300 group-hover:scale-105 motion-reduce:transform-none motion-reduce:transition-none">
-                <benefit.icon className="size-5" strokeWidth={1.8} aria-hidden="true" />
-              </div>
-              <h3 className="mt-4 font-semibold text-foreground">{benefit.title}</h3>
-              <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{benefit.description}</p>
+              <benefit.icon
+                className="size-11 text-brand transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:scale-105 motion-reduce:transform-none motion-reduce:transition-none"
+                strokeWidth={1.6}
+                aria-hidden="true"
+              />
+              <span
+                className="mt-4 h-0.5 w-8 rounded-full bg-brand transition-[width] duration-300 group-hover:w-12 motion-reduce:transition-none"
+                aria-hidden="true"
+              />
+              <h3 className="mt-4 font-semibold text-foreground transition-colors duration-300 group-hover:text-brand motion-reduce:transition-none">
+                {benefit.title}
+              </h3>
+              <p className="mt-2 max-w-xs text-sm leading-relaxed text-muted-foreground">{benefit.description}</p>
             </article>
           ))}
         </div>
