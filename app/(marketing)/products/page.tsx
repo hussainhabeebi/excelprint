@@ -70,7 +70,7 @@ export default async function ProductsPage({
   };
 
   return (
-    <main className="bg-gradient-to-b from-brand-soft/35 via-background to-background">
+    <div className="bg-gradient-to-b from-brand-soft/35 via-background to-background">
       <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
         <header className="mx-auto max-w-3xl text-center">
           <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand">Our Products &amp; Services</p>
@@ -175,6 +175,6 @@ export default async function ProductsPage({
           )}
         </div>
       </div>
-    </main>
+    </div>
   );
 }
