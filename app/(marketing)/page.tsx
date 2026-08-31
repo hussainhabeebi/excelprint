@@ -6,6 +6,7 @@ import { PrintingCapabilities } from "@/components/marketing/printing-capabiliti
 import { ProcessSteps } from "@/components/marketing/process-steps";
 import { ProductGridReveal } from "@/components/marketing/product-grid-reveal";
 import { WhyChooseExcelprint } from "@/components/marketing/why-choose-excelprint";
+import { ContactExcelprint } from "@/components/marketing/contact-excelprint";
 import { Button } from "@/components/ui/button";
 import { POPULAR_PRODUCTS, TRUST_BADGES } from "@/lib/config/popular-products";
 import { listProducts } from "@/lib/catalog/queries";
@@ -145,6 +146,8 @@ export default async function HomePage() {
           </Button>
         </div>
       </section>
+
+      <ContactExcelprint />
     </>
   );
 }
