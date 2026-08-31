@@ -5,6 +5,7 @@ import { Hero } from "@/components/marketing/hero";
 import { PrintingCapabilities } from "@/components/marketing/printing-capabilities";
 import { ProcessSteps } from "@/components/marketing/process-steps";
 import { ProductGridReveal } from "@/components/marketing/product-grid-reveal";
+import { WhyChooseExcelprint } from "@/components/marketing/why-choose-excelprint";
 import { Button } from "@/components/ui/button";
 import { POPULAR_PRODUCTS, TRUST_BADGES } from "@/lib/config/popular-products";
 import { listProducts } from "@/lib/catalog/queries";
@@ -130,6 +131,8 @@ export default async function HomePage() {
           </ProductGridReveal>
         </div>
       </section>
+
+      <WhyChooseExcelprint />
 
       <section className="border-t border-border bg-primary text-primary-foreground">
         <div className="mx-auto flex max-w-7xl flex-col items-center gap-4 px-4 py-16 text-center sm:px-6 lg:px-8">
