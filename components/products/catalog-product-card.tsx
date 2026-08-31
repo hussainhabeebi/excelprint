@@ -6,7 +6,11 @@ import { ProductIllustration } from "@/components/products/product-illustration"
 import { PRODUCT_IMAGES } from "@/components/products/product-images";
 import type { CatalogProductSummary } from "@/lib/catalog/types";
 
-export function CatalogProductCard({ product }: { product: CatalogProductSummary }) {
+type CatalogueCardProduct = Pick<CatalogProductSummary, "id" | "name" | "slug" | "shortDescription"> & {
+  categoryName?: string | null;
+};
+
+export function CatalogProductCard({ product }: { product: CatalogueCardProduct }) {
   const productImage = PRODUCT_IMAGES[product.slug];
 
   return (
@@ -30,7 +34,9 @@ export function CatalogProductCard({ product }: { product: CatalogProductSummary
           <ProductIllustration slug={product.slug} className="aspect-[4/3] w-full" />
         )}
         <div className="flex min-h-48 flex-1 flex-col p-5">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-brand">{product.categoryName}</p>
+          {product.categoryName && (
+            <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-brand">{product.categoryName}</p>
+          )}
           <h2 className="mt-1.5 text-lg font-semibold leading-snug text-foreground transition-colors duration-300 group-hover:text-brand">
             {product.name}
           </h2>

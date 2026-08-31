@@ -3,7 +3,9 @@ import Link from "next/link";
 import { Search } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { listCategories, listProducts } from "@/lib/catalog/queries";
+import { POPULAR_PRODUCTS } from "@/lib/config/popular-products";
 import { CatalogProductCard } from "@/components/products/catalog-product-card";
+import type { CatalogCategory, CatalogProductSummary } from "@/lib/catalog/types";
 
 export const dynamic = "force-dynamic";
 
@@ -12,6 +14,50 @@ export const metadata: Metadata = {
   description: "Explore Excelprint’s complete range of printing, branding, signage and custom production solutions.",
 };
 
+const FALLBACK_PRODUCT_SLUGS = new Set([
+  "business-cards",
+  "flyers",
+  "brochures",
+  "stamps",
+  "stickers",
+  "banners",
+  "roll-up-banners",
+  "packaging",
+]);
+
+type CatalogueProduct = Pick<CatalogProductSummary, "id" | "name" | "slug" | "shortDescription"> & {
+  categoryId?: string;
+  categoryName?: string | null;
+  categorySlug?: string;
+};
+
+async function getCatalogueSafely(): Promise<{
+  categories: CatalogCategory[];
+  products: CatalogueProduct[];
+  isFallback: boolean;
+}> {
+  try {
+    const [categories, products] = await Promise.all([listCategories(), listProducts()]);
+
+    if (products.length > 0) {
+      return { categories, products, isFallback: false };
+    }
+  } catch (error) {
+    console.error("Failed to load the products catalogue", error);
+  }
+
+  return {
+    categories: [],
+    products: POPULAR_PRODUCTS.filter((product) => FALLBACK_PRODUCT_SLUGS.has(product.slug)).map((product) => ({
+      id: `fallback-${product.slug}`,
+      name: product.name,
+      slug: product.slug,
+      shortDescription: product.shortDescription,
+    })),
+    isFallback: true,
+  };
+}
+
 export default async function ProductsPage({
   searchParams,
 }: {
@@ -19,19 +65,16 @@ export default async function ProductsPage({
 }) {
   const { category, q = "" } = await searchParams;
   const searchQuery = q.trim().toLowerCase();
-  const [categories, products] = await Promise.all([
-    listCategories(),
-    listProducts(),
-  ]);
+  const { categories, products, isFallback } = await getCatalogueSafely();
   const availableCategories = categories.filter((item) =>
     products.some((product) => product.categoryId === item.id),
   );
   const filteredProducts = products.filter((product) => {
-    const matchesCategory = !category || product.categorySlug === category;
+    const matchesCategory = isFallback || !category || product.categorySlug === category;
     const matchesSearch =
       !searchQuery ||
       product.name.toLowerCase().includes(searchQuery) ||
-      product.categoryName.toLowerCase().includes(searchQuery) ||
+      product.categoryName?.toLowerCase().includes(searchQuery) ||
       product.shortDescription?.toLowerCase().includes(searchQuery);
 
     return matchesCategory && matchesSearch;
