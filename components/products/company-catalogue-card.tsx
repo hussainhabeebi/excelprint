@@ -47,8 +47,13 @@ export function CompanyCatalogueCard({ item }: { item: CompanyCatalogueItem }) {
         {item.shortDescription && <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-muted-foreground">{item.shortDescription}</p>}
         <div className="mt-auto flex items-center justify-between gap-3 border-t border-border/70 pt-4">
           {item.href ? (
-            <><span className="text-sm font-semibold text-brand">View Details</span><ArrowRight className="size-4 text-brand transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transform-none motion-reduce:transition-none" aria-hidden="true" /></>
-          ) : <span className="text-xs font-medium text-muted-foreground">Details coming soon</span>}
+            <><span className="text-sm font-semibold text-brand transition-colors duration-300 group-hover:text-brand-deep">View Product Details</span><ArrowRight className="size-4 text-brand transition-[color,transform] duration-300 group-hover:translate-x-1 group-hover:text-brand-deep motion-reduce:transform-none motion-reduce:transition-none" aria-hidden="true" /></>
+          ) : (
+            <span className="flex items-center gap-1 text-sm font-semibold text-brand" aria-disabled="true">
+              View Product Details
+              <ArrowRight className="size-4" aria-hidden="true" />
+            </span>
+          )}
         </div>
       </div>
     </Card>

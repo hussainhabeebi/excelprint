@@ -81,8 +81,8 @@ function HomepageProductCard({
             {product.name}
           </span>
         </span>
-        <span className="flex shrink-0 items-center gap-1 text-xs font-semibold text-brand sm:text-sm">
-          <span className="hidden sm:inline">View Product</span>
+        <span className="flex shrink-0 items-center gap-1 text-xs font-semibold text-brand transition-colors duration-300 group-hover:text-brand-deep sm:text-sm">
+          <span>View Product Details</span>
           <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transform-none motion-reduce:transition-none" aria-hidden="true" />
         </span>
       </div>
