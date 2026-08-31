@@ -1,53 +1,45 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Clock } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { ProductIllustration } from "@/components/products/product-illustration";
 import { PRODUCT_IMAGES } from "@/components/products/product-images";
-import { formatMoneyAed } from "@/lib/utils";
 import type { CatalogProductSummary } from "@/lib/catalog/types";
 
 export function CatalogProductCard({ product }: { product: CatalogProductSummary }) {
   const productImage = PRODUCT_IMAGES[product.slug];
 
   return (
-    <Link href={`/product/${product.slug}`} className="group block h-full rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2">
-      <Card className="h-full overflow-hidden border-border py-0 shadow-sm transition-[transform,border-color,box-shadow] duration-300 ease-out hover:-translate-y-1.5 hover:border-brand/40 hover:shadow-lg motion-reduce:transform-none motion-reduce:transition-none">
+    <Link
+      href={`/product/${product.slug}`}
+      aria-label={`View details for ${product.name}`}
+      className="group block h-full rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2"
+    >
+      <Card className="h-full overflow-hidden rounded-2xl border-border bg-white py-0 shadow-sm transition-[transform,border-color,box-shadow] duration-300 ease-out hover:-translate-y-1.5 hover:border-brand/50 hover:shadow-lg motion-reduce:transform-none motion-reduce:transition-none">
         {productImage ? (
           <div className="relative aspect-[4/3] w-full overflow-hidden bg-muted">
             <Image
               src={productImage.src}
               alt={productImage.alt}
               fill
-              sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
-              className="object-cover transition-transform duration-300 ease-out group-hover:scale-[1.025] motion-reduce:transform-none motion-reduce:transition-none"
+              sizes="(min-width: 1280px) 25vw, (min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+              className="object-cover transition-transform duration-300 ease-out group-hover:scale-[1.035] motion-reduce:transform-none motion-reduce:transition-none"
             />
           </div>
         ) : (
           <ProductIllustration slug={product.slug} className="aspect-[4/3] w-full" />
         )}
-        <div className="flex flex-1 flex-col p-5">
+        <div className="flex min-h-48 flex-1 flex-col p-5">
           <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-brand">{product.categoryName}</p>
-          <h3 className="mt-1.5 text-base font-semibold leading-snug text-foreground">{product.name}</h3>
+          <h2 className="mt-1.5 text-lg font-semibold leading-snug text-foreground transition-colors duration-300 group-hover:text-brand">
+            {product.name}
+          </h2>
           {product.shortDescription && (
-            <p className="mt-2 min-h-10 line-clamp-2 text-sm leading-relaxed text-muted-foreground">{product.shortDescription}</p>
+            <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-muted-foreground">{product.shortDescription}</p>
           )}
-          <div className="mt-auto flex items-end justify-between gap-3 border-t border-border/60 pt-4">
-            <div>
-              {product.purchaseMode === "CONFIGURABLE" && (
-                <p className="text-sm text-muted-foreground">
-                  From <span className="font-semibold text-foreground">{formatMoneyAed(product.startingPriceCents)}</span>
-                </p>
-              )}
-              <p className="flex items-center gap-1 text-xs text-muted-foreground">
-                <Clock className="size-3" />
-                {product.productionTimeStandardDays} day{product.productionTimeStandardDays === 1 ? "" : "s"}
-              </p>
-            </div>
-            <span className="flex items-center gap-1 text-sm font-semibold text-brand transition-colors">
-              {product.purchaseMode === "QUOTE_ONLY" ? "Request Quote" : "Configure"}
-              <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-0.5 motion-reduce:transform-none motion-reduce:transition-none" />
-            </span>
+          <div className="mt-auto flex items-center justify-between gap-3 border-t border-border/70 pt-4">
+            <span className="text-sm font-semibold text-brand">View Details</span>
+            <ArrowRight className="size-4 text-brand transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transform-none motion-reduce:transition-none" aria-hidden="true" />
           </div>
         </div>
       </Card>
