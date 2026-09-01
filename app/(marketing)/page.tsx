@@ -126,7 +126,7 @@ export default async function HomePage() {
 
       <ProcessSteps />
 
-      <section className="bg-white">
+      <section id="products" className="scroll-mt-20 bg-white">
         <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
           <div className="mx-auto mb-10 flex max-w-2xl flex-col items-center gap-5 text-center">
             <div className="max-w-2xl">
@@ -158,7 +158,7 @@ export default async function HomePage() {
 
       <WhyChooseExcelprint />
 
-      <section className="border-t border-border bg-primary text-primary-foreground">
+      <section id="custom-quote" className="scroll-mt-20 border-t border-border bg-primary text-primary-foreground">
         <div className="mx-auto flex max-w-7xl flex-col items-center gap-4 px-4 py-16 text-center sm:px-6 lg:px-8">
           <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">Not sure what you need?</h2>
           <p className="max-w-xl text-primary-foreground/80">

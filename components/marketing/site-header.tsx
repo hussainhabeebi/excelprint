@@ -2,16 +2,10 @@ import Link from "next/link";
 import { Phone, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SiteLogo } from "@/components/marketing/site-logo";
+import { HomepageSectionNav } from "@/components/marketing/homepage-section-nav";
 import { LogoutButton } from "@/components/auth/logout-button";
 import { businessConfig } from "@/lib/config/business";
 import { getCurrentUser } from "@/lib/auth/current-user";
-
-const NAV_LINKS = [
-  { href: "/products", label: "Products" },
-  { href: "/printing-services-ajman", label: "Services" },
-  { href: "/quote", label: "Custom Quote" },
-  { href: "/blog", label: "Guides" },
-];
 
 export async function SiteHeader() {
   const user = await getCurrentUser();
@@ -20,21 +14,11 @@ export async function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
-        <Link href="/" className="shrink-0">
+        <Link href="/" className="flex h-full shrink-0 items-center overflow-hidden">
           <SiteLogo priority />
         </Link>
 
-        <nav className="hidden items-center gap-6 md:flex">
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-            >
-              {link.label}
-            </Link>
-          ))}
-        </nav>
+        <HomepageSectionNav />
 
         <div className="flex items-center gap-2">
           {businessConfig.phone && (

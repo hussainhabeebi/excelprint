@@ -40,7 +40,7 @@ export function PrintingCapabilities() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="bg-background">
+    <section id="services" ref={sectionRef} className="scroll-mt-20 bg-background">
       <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 py-14 sm:px-6 sm:py-16 lg:grid-cols-[1.08fr_0.92fr] lg:gap-14 lg:px-8">
         <div
           className={`transition-[opacity,transform] duration-700 ease-out motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none ${
