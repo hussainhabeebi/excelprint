@@ -12,7 +12,7 @@ export async function SiteHeader() {
   const isCustomer = user?.type === "customer";
 
   return (
-    <header className="sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
+    <header className="sticky top-0 z-40 border-b border-black/5 bg-[#FFFFFF] shadow-[0_1px_3px_rgba(0,0,0,0.04)]">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex h-full shrink-0 items-center overflow-hidden">
           <SiteLogo priority />
