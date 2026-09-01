@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Search } from "lucide-react";
 import { CompanyCatalogueCard } from "@/components/products/company-catalogue-card";
+import { CatalogueGridReveal } from "@/components/products/catalogue-grid-reveal";
 import { listProducts } from "@/lib/catalog/queries";
 import { cn } from "@/lib/utils";
 import type { CatalogProductSummary } from "@/lib/catalog/types";
@@ -136,9 +137,9 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
                     </div>
                     <span className="shrink-0 text-sm text-muted-foreground">{group.items.length} {group.items.length === 1 ? "item" : "items"}</span>
                   </div>
-                  <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                  <CatalogueGridReveal>
                     {group.items.map((item) => <CompanyCatalogueCard key={item.slug} item={item} />)}
-                  </div>
+                  </CatalogueGridReveal>
                 </section>
               ))}
             </div>
